@@ -1,5 +1,7 @@
 ## Getting Started with Java Spring
 
+The goal of this ```readme.MD``` is to spare you, the reader, of having to spend hours debugging and figuring simple things related to Java Spring.
+
 You'll need to do the following things to get up and running:
 ### Java JDK and IDE
 * Install [Java JDK 1.8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) on your system. Make sure that you install the JDK, not just the JRE. I've run into some
@@ -24,7 +26,7 @@ IDE offerings.
 Also, make sure that you install the Java JDK before you install the IDE. In many cases, the IDE will not allow you to continue
 the installation if it cannot detect a valid JDK on your system. 
 
-###Maven
+### Maven
 
 [Maven](https://maven.apache.org/download.cgi) is pretty awesome. It operates using a **Project Object Model.xml** file in your
  project's base directory. The **pom.xml** file contains all of your dependencies. Maven will automatically download and cache
@@ -52,7 +54,11 @@ the installation if it cannot detect a valid JDK on your system.
 ```
 
 Maven will go and download ```jstl```, ```spring-beans```, ```spring-web``` and any other dependencies you state into the local
-folder. 
+folder. There's a bunch of other dependencies we need that I haven't listed here.
+
+**FYI**: if in the future you need a dependency but can't find it, you can usually google 
+```spring data sql maven pom```, and the first link will be the Maven Central Repository. There, you'll be able to find the XML code
+all ready for you to just copy and paste into your ```pom.xml```, and then Maven will automatically import those dependencies for your project.
 
 You need add ```M2_HOME``` and ```MAVEN_HOME``` to your environment variables. Here is a [good tutorial](https://www.mkyong.com/maven/how-to-install-maven-in-windows/) I followed to get Maven running.
 
@@ -104,3 +110,4 @@ If you type in ```http://localhost:8080/Dining-0.0.1-SNAPSHOT/reviews/1```, you 
 {"id":1,"userName":"ychennay","reviewText":"This restaurant was terrific!"}
 ```
 
+Obviously this is not the most detailed walkthrough. I'll continue adding to this MD as I make more progress.
