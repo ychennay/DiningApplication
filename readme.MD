@@ -1,3 +1,6 @@
+## Citations
+Templates for starting design taken from this tutorial: http://viralpatel.net/blogs/spring-4-mvc-rest-example-json/
+
 ## Getting Started with Java Spring
 
 The goal of this ```readme.MD``` is to spare you, the reader, of having to spend hours debugging and figuring simple things related to Java Spring.
