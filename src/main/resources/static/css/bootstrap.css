@@ -52,9 +52,14 @@ template {
 a {
   background-color: transparent;
 }
-a:active,
-a:hover {
-  outline: 0;
+
+a:hover{
+  background-color:#aaa;
+  color:white;
+}
+a:active{
+  background-color:#000;
+  color:white;
 }
 abbr[title] {
   border-bottom: 1px dotted;

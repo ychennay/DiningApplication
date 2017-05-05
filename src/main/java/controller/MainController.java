@@ -17,7 +17,7 @@ public class MainController {
     @RequestMapping(value = "/help", method = RequestMethod.GET)
     public String help(){
         System.out.println("GET called on help page");
-        return "help.html";
+        return "help_page.html";
     }
 
     @RequestMapping(value = "/main", method = RequestMethod.GET)
@@ -29,13 +29,13 @@ public class MainController {
     @RequestMapping(value = "/restaurant", method = RequestMethod.GET)
     public String restaurants(){
         System.out.println("GET called on restaurant page");
-        return "restaurant.html";
+        return "restaurant_page.html";
     }
 
     @RequestMapping(value = "/review", method = RequestMethod.GET)
     public String reviews(){
         System.out.println("GET called on restaurant page");
-        return "review.html";
+        return "review_page.html";
     }
 
 
