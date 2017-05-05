@@ -17,7 +17,7 @@ public class MainController {
     @RequestMapping(value = "/help", method = RequestMethod.GET)
     public String help(){
         System.out.println("GET called on help page");
-        return "html/help.html";
+        return "help.html";
     }
 
     @RequestMapping(value = "/main", method = RequestMethod.GET)

@@ -2,3 +2,10 @@
 /.classpath
 /.springBeans
 /.project
+.idea/artifacts/
+.idea/compiler.xml
+.idea/libraries/
+.idea/misc.xml
+.idea/modules.xml
+.idea/workspace.xml
+Dining.iml
