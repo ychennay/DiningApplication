@@ -3,6 +3,7 @@ package main.java.service;
 
 import main.java.model.Restaurant;
 import main.java.model.Review;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ import java.util.List;
  */
 
 @Component
-public class RestaurantDao {
+public class RestaurantDaoImplementation implements RestaurantService {
 
     private static List<Restaurant> restaurants;
     {
@@ -21,11 +22,12 @@ public class RestaurantDao {
 
     }
 
-    public List list(){
+    public List listAllRestaurants(){
         return restaurants;
     }
 
-    public Restaurant get(int id){
+    @Override
+    public Restaurant getRestaurantById(int id){
         for (Restaurant r: restaurants){
             if (r.getId() == id){
                 return r;
@@ -34,9 +36,19 @@ public class RestaurantDao {
     return null;
     }
 
-    public Restaurant create(Restaurant restaurant){
+    public Restaurant saveRestaurant(Restaurant restaurant){
         restaurant.setId((int)Math.random());
         restaurants.add(restaurant);
         return restaurant;
+    }
+
+    @Override
+    public Restaurant updateRestaurant(int id) {
+        return null;
+    }
+
+    @Override
+    public Restaurant deleteRestaurant(int id) {
+        return null;
     }
 }

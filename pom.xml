@@ -6,8 +6,12 @@
   <packaging>war</packaging>
     <properties>
         <jackson.version>2.7.5</jackson.version>
+        <aws-java-sdk.version>1.10.39</aws-java-sdk.version>
     </properties>
+
+
   <build>
+
     <sourceDirectory>src</sourceDirectory>
     <plugins>
       <plugin>
@@ -21,7 +25,7 @@
         <plugin>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-maven-plugin</artifactId>
-            <version>1.5.3.RELEASE</version>
+            <version>1.5.2.RELEASE</version>
             <executions>
                 <execution>
                     <goals>
@@ -53,15 +57,35 @@
           <artifactId>spring-boot-starter-web</artifactId>
           <version>1.5.2.RELEASE</version>
       </dependency>
+      <!-- https://mvnrepository.com/artifact/com.github.derjust/spring-data-dynamodb -->
+      <dependency>
+          <groupId>com.github.derjust</groupId>
+          <artifactId>spring-data-dynamodb</artifactId>
+          <version>4.5.0</version>
+      </dependency>
+      <!-- https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-dynamodb -->
+      <dependency>
+          <groupId>com.amazonaws</groupId>
+          <artifactId>aws-java-sdk-dynamodb</artifactId>
+      </dependency>
+      <dependency>
+          <groupId>org.springframework.data</groupId>
+          <artifactId>spring-data-releasetrain</artifactId>
+          <version>Gosling-SR1</version>
+          <type>pom</type>
+          <scope>import</scope>
+      </dependency>
+      <dependency>
+          <groupId>com.amazonaws</groupId>
+          <artifactId>aws-java-sdk-bom</artifactId>
+          <version>${aws-java-sdk.version}</version>
+          <type>pom</type>
+          <scope>import</scope>
+      </dependency>
       <dependency>
           <groupId>org.springframework.boot</groupId>
           <artifactId>spring-boot-starter-parent</artifactId>
           <version>1.5.2.RELEASE</version>
-      </dependency>
-      <dependency>
-          <groupId>com.amazonaws</groupId>
-          <artifactId>DynamoDBLocal</artifactId>
-          <version>[1.11,2.0)</version>
       </dependency>
       <dependency>
           <groupId>org.springframework.boot</groupId>
@@ -70,7 +94,7 @@
       <dependency>
           <groupId>org.springframework.boot</groupId>
           <artifactId>spring-boot-starter-tomcat</artifactId>
-          <scope>provided</scope>
+          <version>1.5.2.RELEASE</version>
       </dependency>
   	<dependency>
   		<groupId>org.springframework</groupId>
