@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-public class ReviewRestController {
+public class ReviewRestController extends GenericRestController{
 
     @Autowired
     private ReviewServiceImplementation reviewServiceImplementation;

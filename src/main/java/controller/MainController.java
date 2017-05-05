@@ -26,5 +26,17 @@ public class MainController {
         return "landing.html";
     }
 
+    @RequestMapping(value = "/restaurant", method = RequestMethod.GET)
+    public String restaurants(){
+        System.out.println("GET called on restaurant page");
+        return "restaurant.html";
+    }
+
+    @RequestMapping(value = "/review", method = RequestMethod.GET)
+    public String reviews(){
+        System.out.println("GET called on restaurant page");
+        return "restaurant.html";
+    }
+
 
 }

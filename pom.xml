@@ -7,6 +7,8 @@
     <properties>
         <jackson.version>2.7.5</jackson.version>
         <aws-java-sdk.version>1.10.39</aws-java-sdk.version>
+        <dynamodb-local.port>8000</dynamodb-local.port>
+        <dynamodb-local.endpoint>http://localhost:${dynamodb-local.port}</dynamodb-local.endpoint>
     </properties>
 
 
@@ -90,12 +92,6 @@
           <type>pom</type>
           <scope>import</scope>
       </dependency>
-
-      <dependency>
-          <groupId>org.springframework.boot</groupId>
-          <artifactId>spring-boot-starter-data-jpa</artifactId>
-          <version>1.5.3.RELEASE</version>
-      </dependency>
       <dependency>
           <groupId>org.springframework.boot</groupId>
           <artifactId>spring-boot-starter-tomcat</artifactId>
@@ -116,6 +112,16 @@
       <artifactId>spring-web</artifactId>
       <version>4.3.4.RELEASE</version>
     </dependency>
+      <dependency>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter-data-jpa</artifactId>
+          <exclusions>
+              <exclusion>
+                  <groupId>org.hibernate</groupId>
+                  <artifactId>hibernate-entitymanager</artifactId>
+              </exclusion>
+          </exclusions>
+      </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-webmvc</artifactId>
@@ -157,6 +163,11 @@
           <artifactId>javax.servlet-api</artifactId>
           <version>3.0.1</version>
           <scope>provided</scope>
+      </dependency>
+      <dependency>
+          <groupId>com.amazonaws</groupId>
+          <artifactId>DynamoDBLocal</artifactId>
+          <version>${aws.dynamodblocal.version}</version>
       </dependency>
   </dependencies>
 </project>
