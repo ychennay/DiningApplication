@@ -35,7 +35,7 @@ public class MainController {
     @RequestMapping(value = "/review", method = RequestMethod.GET)
     public String reviews(){
         System.out.println("GET called on restaurant page");
-        return "restaurant.html";
+        return "review.html";
     }
 
 

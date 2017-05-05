@@ -16,11 +16,11 @@ public class ReviewRestController extends GenericRestController{
     @Autowired
     private ReviewServiceImplementation reviewServiceImplementation;
 
-    @GetMapping("/reviews")
+    @GetMapping("/api/reviews")
         public List getReviews() {
         return reviewServiceImplementation.listAllReviews();}
 
-    @GetMapping("/reviews/{id}")
+    @GetMapping("/api/reviews/{id}")
     public ResponseEntity getReview(@PathVariable("id") int id) {
         System.out.println("Getting ID number " + id);
         Review review = reviewServiceImplementation.getReviewById(id);
@@ -29,7 +29,7 @@ public class ReviewRestController extends GenericRestController{
         return new ResponseEntity(review, HttpStatus.OK);
     }
 
-    @PostMapping("/reviews")
+    @PostMapping("/api/reviews")
     public ResponseEntity createReview(@RequestBody Review review){
         reviewServiceImplementation.create(review);
         return new ResponseEntity(review, HttpStatus.OK);
