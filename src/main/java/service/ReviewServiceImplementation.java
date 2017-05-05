@@ -12,7 +12,7 @@ import java.util.List;
  */
 
 @Component
-public class ReviewDaoImplementation implements ReviewService{
+public class ReviewServiceImplementation implements ReviewService{
 
     private static List<Review> reviews;
     {

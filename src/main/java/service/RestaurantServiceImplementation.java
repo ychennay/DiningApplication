@@ -14,7 +14,7 @@ import java.util.List;
  */
 
 @Component
-public class RestaurantDaoImplementation implements RestaurantService {
+public class RestaurantServiceImplementation implements RestaurantService {
 
     private static List<Restaurant> restaurants;
     {

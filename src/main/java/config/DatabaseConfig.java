@@ -13,7 +13,9 @@ import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDB;
 import com.amazonaws.services.dynamodbv2.model.*;
 import com.amazonaws.services.dynamodbv2.waiters.AmazonDynamoDBWaiters;
+import com.amazonaws.util.StringUtils;
 import org.slf4j.LoggerFactory;
+import org.slf4j.event.Level;
 import org.socialsignin.spring.data.dynamodb.repository.config.EnableDynamoDBRepositories;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -32,7 +34,7 @@ import java.util.logging.Logger;
 @EnableDynamoDBRepositories
 public class DatabaseConfig {
 
-    private final Logger logger = LoggerFactory.getLogger(DatabaseConfig.getClass());
+    private final Logger logger = (Logger) LoggerFactory.getLogger("Logger");
 
     @Value("${amazon.dynamodb.endpoint}")
     private String amazonDynamoDBEndpoint;
@@ -44,18 +46,22 @@ public class DatabaseConfig {
     private String amazonAWSSecretKey;
 
     @Bean
-    public AmazonDynamoDB amazonDynamoDB(){
+    public AmazonDynamoDB amazonDynamoDB(AWSCredentials awsCredentials) {
         logger.info("Entering AmazonDynamoDB");
+        AmazonDynamoDB amazonDynamoDB = new AmazonDynamoDBClient(awsCredentials);
+        if (StringUtils.isNullOrEmpty(amazonDynamoDBEndpoint)) {
+
+        } else {
+            amazonDynamoDB.setEndpoint(amazonDynamoDBEndpoint);
+        }
+        return amazonDynamoDB;
+    }
+    @Bean
+    public AWSCredentials awsCredentials(){
+        return new BasicAWSCredentials(amazonAWSAccessKey, amazonAWSSecretKey);
 
 
-         AwsClientBuilder.EndpointConfiguration config = new AwsClientBuilder.EndpointConfiguration(
-                 amazonDynamoDBEndpoint,
-                 "region");
-         AwsClientBuilder.EndpointConfiguration
 
-
-
-        return client;
     }
 
 
