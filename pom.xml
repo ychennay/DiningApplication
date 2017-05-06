@@ -7,6 +7,7 @@
     <properties>
         <jackson.version>2.7.5</jackson.version>
         <aws-java-sdk.version>1.10.39</aws-java-sdk.version>
+        <spring-version>4.3.7.RELEASE</spring-version>
         <dynamodb-local.port>8000</dynamodb-local.port>
         <dynamodb-local.endpoint>http://localhost:${dynamodb-local.port}</dynamodb-local.endpoint>
     </properties>
@@ -59,7 +60,13 @@
     <version>1.5.2.RELEASE</version>
   </parent>
 
+
   <dependencies>
+      <dependency>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-devtools</artifactId>
+          <optional>true</optional>
+      </dependency>
       <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web -->
       <dependency>
           <groupId>org.springframework.boot</groupId>
@@ -100,17 +107,17 @@
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-context</artifactId>
-      <version>4.3.7.RELEASE</version>
+      <version>${spring-version}</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-core</artifactId>
-      <version>4.3.7.RELEASE</version>
+      <version>${spring-version}</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-web</artifactId>
-      <version>4.3.4.RELEASE</version>
+      <version>${spring-version}</version>
     </dependency>
       <dependency>
           <groupId>org.springframework.boot</groupId>
@@ -125,14 +132,8 @@
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-webmvc</artifactId>
-      <version>4.3.4.RELEASE</version>
+      <version>${spring-version}</version>
     </dependency>
-      <dependency>
-          <groupId>javax.servlet</groupId>
-          <artifactId>javax.servlet-api</artifactId>
-          <version>3.0.1</version>
-          <scope>provided</scope>
-      </dependency>
     <dependency>
       <groupId>jstl</groupId>
       <artifactId>jstl</artifactId>
@@ -141,17 +142,12 @@
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-beans</artifactId>
-      <version>4.3.7.RELEASE</version>
+      <version>${spring-version}</version>
     </dependency>
       <dependency>
           <groupId>org.springframework</groupId>
           <artifactId>spring-web</artifactId>
-          <version>4.3.4.RELEASE</version>
-      </dependency>
-      <dependency>
-          <groupId>org.springframework</groupId>
-          <artifactId>spring-web</artifactId>
-          <version>4.3.3.RELEASE</version>
+          <version>${spring-version}</version>
       </dependency>
       <dependency>
           <groupId>com.fasterxml.jackson.core</groupId>
