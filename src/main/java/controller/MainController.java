@@ -20,7 +20,7 @@ public class MainController {
         return "help_page.html";
     }
 
-    @RequestMapping(value = "/main", method = RequestMethod.GET)
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public String landing(){
         System.out.println("GET called on index page");
         return "landing.html";
@@ -38,5 +38,10 @@ public class MainController {
         return "review_page.html";
     }
 
+    @RequestMapping(value = "/user", method = RequestMethod.GET)
+    public String users(){
+        System.out.println("GET called on user page");
+        return "user_page.html";
+    }
 
 }
