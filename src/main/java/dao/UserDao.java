@@ -3,6 +3,7 @@ package main.java.dao;
 import main.java.model.User;
 import org.socialsignin.spring.data.dynamodb.repository.EnableScan;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.NoRepositoryBean;
 
 import java.util.List;
 

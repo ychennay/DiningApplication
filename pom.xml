@@ -62,10 +62,34 @@
   </parent>
 
 
+
+
+
+
+
   <dependencies>
+
+
+
+      <dependency>
+          <groupId>org.springframework.data</groupId>
+          <artifactId>spring-data-releasetrain</artifactId>
+          <version>Hopper-SR10</version>
+          <type>pom</type>
+          <scope>import</scope>
+      </dependency>
+
+      <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
+
+
       <dependency>
           <groupId>org.springframework.boot</groupId>
           <artifactId>spring-boot-devtools</artifactId>
+          <optional>true</optional>
+      </dependency>
+      <dependency>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-configuration-processor</artifactId>
           <optional>true</optional>
       </dependency>
       <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web -->
@@ -74,25 +98,18 @@
           <artifactId>spring-boot-starter-web</artifactId>
           <version>${spring-boot-version}</version>
       </dependency>
-      <!-- https://mvnrepository.com/artifact/com.github.derjust/spring-data-dynamodb -->
-      <dependency>
-          <groupId>com.github.derjust</groupId>
-          <artifactId>spring-data-dynamodb</artifactId>
-          <version>4.5.0</version>
-      </dependency>
-      <!-- https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-dynamodb -->
       <dependency>
           <groupId>com.amazonaws</groupId>
           <artifactId>aws-java-sdk-dynamodb</artifactId>
-          <version>1.11.125</version>
+          <version>1.11.34</version>
       </dependency>
       <dependency>
-          <groupId>org.springframework.data</groupId>
-          <artifactId>spring-data-releasetrain</artifactId>
-          <version>Gosling-SR1</version>
-          <type>pom</type>
-          <scope>import</scope>
+          <groupId>com.github.derjust</groupId>
+          <artifactId>spring-data-dynamodb</artifactId>
+          <version>4.3.1</version>
       </dependency>
+      <!-- https://mvnrepository.com/artifact/com.github.derjust/spring-data-dynamodb -->
+      <!-- https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-dynamodb -->
       <dependency>
           <groupId>com.amazonaws</groupId>
           <artifactId>aws-java-sdk-bom</artifactId>
@@ -105,6 +122,7 @@
           <artifactId>spring-boot-starter-tomcat</artifactId>
           <version>${spring-boot-version}</version>
       </dependency>
+
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-context</artifactId>
@@ -120,16 +138,6 @@
       <artifactId>spring-web</artifactId>
       <version>${spring-version}</version>
     </dependency>
-      <dependency>
-          <groupId>org.springframework.boot</groupId>
-          <artifactId>spring-boot-starter-data-jpa</artifactId>
-          <exclusions>
-              <exclusion>
-                  <groupId>org.hibernate</groupId>
-                  <artifactId>hibernate-entitymanager</artifactId>
-              </exclusion>
-          </exclusions>
-      </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-webmvc</artifactId>
