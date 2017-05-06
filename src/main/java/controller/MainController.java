@@ -44,4 +44,10 @@ public class MainController {
         return "user_page.html";
     }
 
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String login(){
+        System.out.println("GET called on login page");
+        return "login_page.html";
+    }
+
 }
