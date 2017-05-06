@@ -6,11 +6,11 @@
   <packaging>war</packaging>
     <properties>
         <jackson.version>2.7.5</jackson.version>
-        <aws-java-sdk.version>1.10.39</aws-java-sdk.version>
         <spring-version>4.3.7.RELEASE</spring-version>
         <dynamodb-local.port>8000</dynamodb-local.port>
         <dynamodb-local.endpoint>http://localhost:${dynamodb-local.port}</dynamodb-local.endpoint>
         <spring-boot-version>1.5.2.RELEASE</spring-boot-version>
+        <aws-sdk-java-version>1.11.124</aws-sdk-java-version>
     </properties>
 
 
@@ -55,12 +55,6 @@
         </repository>
     </repositories>
 
-  <parent>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-parent</artifactId>
-    <version>${spring-boot-version}</version>
-  </parent>
-
 
 
 
@@ -68,9 +62,6 @@
 
 
   <dependencies>
-
-
-
       <dependency>
           <groupId>org.springframework.data</groupId>
           <artifactId>spring-data-releasetrain</artifactId>
@@ -78,9 +69,6 @@
           <type>pom</type>
           <scope>import</scope>
       </dependency>
-
-      <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
-
 
       <dependency>
           <groupId>org.springframework.boot</groupId>
@@ -101,19 +89,18 @@
       <dependency>
           <groupId>com.amazonaws</groupId>
           <artifactId>aws-java-sdk-dynamodb</artifactId>
-          <version>1.11.34</version>
+          <version>${aws-sdk-java-version}</version>
       </dependency>
       <dependency>
           <groupId>com.github.derjust</groupId>
           <artifactId>spring-data-dynamodb</artifactId>
           <version>4.3.1</version>
       </dependency>
-      <!-- https://mvnrepository.com/artifact/com.github.derjust/spring-data-dynamodb -->
-      <!-- https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-dynamodb -->
+
       <dependency>
           <groupId>com.amazonaws</groupId>
           <artifactId>aws-java-sdk-bom</artifactId>
-          <version>${aws-java-sdk.version}</version>
+          <version>${aws-sdk-java-version}</version>
           <type>pom</type>
           <scope>import</scope>
       </dependency>
@@ -167,11 +154,6 @@
           <artifactId>javax.servlet-api</artifactId>
           <version>3.0.1</version>
           <scope>provided</scope>
-      </dependency>
-      <dependency>
-          <groupId>com.amazonaws</groupId>
-          <artifactId>DynamoDBLocal</artifactId>
-          <version>${aws.dynamodblocal.version}</version>
       </dependency>
       <dependency>
           <groupId>org.projectlombok</groupId>
