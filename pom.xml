@@ -10,6 +10,7 @@
         <spring-version>4.3.7.RELEASE</spring-version>
         <dynamodb-local.port>8000</dynamodb-local.port>
         <dynamodb-local.endpoint>http://localhost:${dynamodb-local.port}</dynamodb-local.endpoint>
+        <spring-boot-version>1.5.2.RELEASE</spring-boot-version>
     </properties>
 
 
@@ -28,7 +29,7 @@
         <plugin>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-maven-plugin</artifactId>
-            <version>1.5.2.RELEASE</version>
+            <version>${spring-boot-version}</version>
             <executions>
                 <execution>
                     <goals>
@@ -57,7 +58,7 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>1.5.2.RELEASE</version>
+    <version>${spring-boot-version}</version>
   </parent>
 
 
@@ -71,7 +72,7 @@
       <dependency>
           <groupId>org.springframework.boot</groupId>
           <artifactId>spring-boot-starter-web</artifactId>
-          <version>1.5.2.RELEASE</version>
+          <version>${spring-boot-version}</version>
       </dependency>
       <!-- https://mvnrepository.com/artifact/com.github.derjust/spring-data-dynamodb -->
       <dependency>
@@ -102,7 +103,7 @@
       <dependency>
           <groupId>org.springframework.boot</groupId>
           <artifactId>spring-boot-starter-tomcat</artifactId>
-          <version>1.5.2.RELEASE</version>
+          <version>${spring-boot-version}</version>
       </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
@@ -145,11 +146,6 @@
       <version>${spring-version}</version>
     </dependency>
       <dependency>
-          <groupId>org.springframework</groupId>
-          <artifactId>spring-web</artifactId>
-          <version>${spring-version}</version>
-      </dependency>
-      <dependency>
           <groupId>com.fasterxml.jackson.core</groupId>
           <artifactId>jackson-databind</artifactId>
           <version>${jackson.version}</version>
@@ -168,6 +164,12 @@
           <groupId>com.amazonaws</groupId>
           <artifactId>DynamoDBLocal</artifactId>
           <version>${aws.dynamodblocal.version}</version>
+      </dependency>
+      <dependency>
+          <groupId>org.projectlombok</groupId>
+          <artifactId>lombok</artifactId>
+          <version>1.16.10</version>
+          <scope>provided</scope>
       </dependency>
   </dependencies>
 </project>
