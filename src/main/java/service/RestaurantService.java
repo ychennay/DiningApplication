@@ -12,6 +12,10 @@ public interface RestaurantService {
 
     List<Restaurant> listAllRestaurants();
 
+    void setRestaurantList(List<Restaurant> restaurantList);
+
+    Restaurant searchIndex(int index);
+
 //    Restaurant getRestaurantById(String id);
 //
 //    Restaurant saveRestaurant(Restaurant restaurant);

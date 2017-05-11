@@ -11,9 +11,7 @@ import com.amazonaws.services.dynamodbv2.model.KeysAndAttributes;
 import main.java.model.Restaurant;
 import org.springframework.context.annotation.PropertySource;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @PropertySource(value = "database.properties", ignoreResourceNotFound = true)
 public class DynamoClientMapper {
@@ -75,7 +73,8 @@ public class DynamoClientMapper {
 
         Table table = dynamoDB.getTable(tableName);
 
-        List<Restaurant> restaurantList = null;
+//         Arbitrarily chose LinkedList as List implementation
+        List<Restaurant> restaurantList = new LinkedList<Restaurant>();
 
         try {
             ItemCollection<ScanOutcome> items = table.scan();
@@ -85,6 +84,7 @@ public class DynamoClientMapper {
                 Item item = iter.next();
 
                 Restaurant restaurant = new Restaurant(item.getString("restaurant-id"));
+
                 restaurant.setAddress(item.getStringSet("address"));
                 restaurant.setCity(item.getString("city"));
                 restaurant.setCountryCode(item.getString("country_code"));

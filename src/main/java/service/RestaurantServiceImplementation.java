@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -16,14 +17,18 @@ import java.util.List;
 @Component
 public class RestaurantServiceImplementation implements RestaurantService {
 
-    private static List<Restaurant> restaurants;
-    {
-        restaurants = new ArrayList();
+    private List<Restaurant> restaurantList = new LinkedList<>();
 
+    public List<Restaurant> listAllRestaurants() {
+        return restaurantList;
     }
 
-    public List listAllRestaurants(){
-        return restaurants;
+    public void setRestaurantList(List<Restaurant> restaurantList) {
+        ;
+    }
+
+    public Restaurant searchIndex(int index) {
+        return restaurantList.get(index);
     }
 
 //    @Override
