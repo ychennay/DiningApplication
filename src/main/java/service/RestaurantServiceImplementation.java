@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -16,39 +17,43 @@ import java.util.List;
 @Component
 public class RestaurantServiceImplementation implements RestaurantService {
 
-    private static List<Restaurant> restaurants;
-    {
-        restaurants = new ArrayList();
+    private List<Restaurant> restaurantList = new LinkedList<>();
 
+    public List<Restaurant> listAllRestaurants() {
+        return restaurantList;
     }
 
-    public List listAllRestaurants(){
-        return restaurants;
+    public void setRestaurantList(List<Restaurant> restaurantList) {
+        ;
     }
 
-    @Override
-    public Restaurant getRestaurantById(int id){
-        for (Restaurant r: restaurants){
-            if (r.getId() == id){
-                return r;
-            }
-        }
-    return null;
+    public Restaurant searchIndex(int index) {
+        return restaurantList.get(index);
     }
 
-    public Restaurant saveRestaurant(Restaurant restaurant){
-        restaurant.setId((int)Math.random());
-        restaurants.add(restaurant);
-        return restaurant;
-    }
+//    @Override
+//    public Restaurant getRestaurantById(int id){
+//        for (Restaurant r: restaurants){
+//            if (r.getId() == id){
+//                return r;
+//            }
+//        }
+//    return null;
+//    }
+//
+//    public Restaurant saveRestaurant(Restaurant restaurant){
+//        restaurant.setId((int)Math.random());
+//        restaurants.add(restaurant);
+//        return restaurant;
+//    }
 
-    @Override
-    public Restaurant updateRestaurant(int id) {
-        return null;
-    }
-
-    @Override
-    public Restaurant deleteRestaurant(int id) {
-        return null;
-    }
+//    @Override
+//    public Restaurant updateRestaurant(int id) {
+//        return null;
+//    }
+//
+//    @Override
+//    public Restaurant deleteRestaurant(int id) {
+//        return null;
+//    }
 }

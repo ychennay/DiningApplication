@@ -32,7 +32,6 @@ public class ReviewServiceImplementation implements ReviewService{
 
     @Override
     public List<Review> listAllReviews() {
-
             return reviews;
     }
 
