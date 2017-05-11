@@ -1,5 +1,6 @@
 package main.java;
 
+import main.java.dao.DynamoClientMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -21,7 +22,10 @@ public class App extends SpringBootServletInitializer{
 
 //    private static final Logger logger = Logger.getLogger(App.class.toString());
 
-    public static void main(String[] args){
+    public static void main(String[] args) throws Exception {
+        DynamoClientMapper dynamoClientMapper = new DynamoClientMapper();
+        dynamoClientMapper.initAWSCreds();
+        dynamoClientMapper.readRestaurantItem("fil-am-bbq-grill-orange");
         SpringApplication.run(App.class, args);
     }
 

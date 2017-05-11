@@ -3,5 +3,5 @@
 /.springBeans
 /.project
 .idea/*
-track/
+target/
 Dining.iml

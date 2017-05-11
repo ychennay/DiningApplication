@@ -26,29 +26,29 @@ public class RestaurantServiceImplementation implements RestaurantService {
         return restaurants;
     }
 
-    @Override
-    public Restaurant getRestaurantById(int id){
-        for (Restaurant r: restaurants){
-            if (r.getId() == id){
-                return r;
-            }
-        }
-    return null;
-    }
+//    @Override
+//    public Restaurant getRestaurantById(int id){
+//        for (Restaurant r: restaurants){
+//            if (r.getId() == id){
+//                return r;
+//            }
+//        }
+//    return null;
+//    }
+//
+//    public Restaurant saveRestaurant(Restaurant restaurant){
+//        restaurant.setId((int)Math.random());
+//        restaurants.add(restaurant);
+//        return restaurant;
+//    }
 
-    public Restaurant saveRestaurant(Restaurant restaurant){
-        restaurant.setId((int)Math.random());
-        restaurants.add(restaurant);
-        return restaurant;
-    }
-
-    @Override
-    public Restaurant updateRestaurant(int id) {
-        return null;
-    }
-
-    @Override
-    public Restaurant deleteRestaurant(int id) {
-        return null;
-    }
+//    @Override
+//    public Restaurant updateRestaurant(int id) {
+//        return null;
+//    }
+//
+//    @Override
+//    public Restaurant deleteRestaurant(int id) {
+//        return null;
+//    }
 }

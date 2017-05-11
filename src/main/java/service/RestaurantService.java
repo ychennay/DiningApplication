@@ -12,12 +12,12 @@ public interface RestaurantService {
 
     List<Restaurant> listAllRestaurants();
 
-    Restaurant getRestaurantById(int id);
-
-    Restaurant saveRestaurant(Restaurant restaurant);
-
-    Restaurant updateRestaurant(int id);
-
-    Restaurant deleteRestaurant(int id);
+//    Restaurant getRestaurantById(String id);
+//
+//    Restaurant saveRestaurant(Restaurant restaurant);
+//
+//    Restaurant updateRestaurant(int id);
+//
+//    Restaurant deleteRestaurant(int id);
 
 }

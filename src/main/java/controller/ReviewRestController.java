@@ -17,8 +17,9 @@ public class ReviewRestController extends GenericRestController{
     private ReviewServiceImplementation reviewServiceImplementation;
 
     @GetMapping("/api/reviews")
-        public List getReviews() {
-        return reviewServiceImplementation.listAllReviews();}
+    public List getReviews() {
+        return reviewServiceImplementation.listAllReviews();
+    }
 
     @GetMapping("/api/reviews/{id}")
     public ResponseEntity getReview(@PathVariable("id") int id) {
