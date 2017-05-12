@@ -1,7 +1,6 @@
 package main.java.service;
 
 import main.java.model.Restaurant;
-import main.java.model.Review;
 
 import java.util.List;
 
@@ -10,11 +9,17 @@ import java.util.List;
  */
 public interface RestaurantService {
 
-    List<Restaurant> listAllRestaurants();
+    Restaurant getRestaurantById(String restaurantId);
 
-    void setRestaurantList(List<Restaurant> restaurantList);
+    List<Restaurant> randomFiveRestaurants(String city);
 
-    Restaurant searchIndex(int index);
+    List<Restaurant> randomFiveRestaurants(String city, String label);
+
+//    List<Restaurant> listAllRestaurants();
+//
+//    void setRestaurantList(List<Restaurant> restaurantList);
+//
+//    Restaurant searchIndex(int index);
 
 //    Restaurant getRestaurantById(String id);
 //

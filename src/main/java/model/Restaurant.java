@@ -40,7 +40,6 @@ public class Restaurant {
     private String stateCode;
     private String url;
 
-
     public Restaurant(String restaurantId) {
         this.restaurantId = restaurantId;
     }
@@ -248,6 +247,7 @@ public class Restaurant {
     public int getReviewCount() {
         return reviewCount;
     }
+
     public void setReviewCount(int reviewCount) {
         this.reviewCount = reviewCount;
     }

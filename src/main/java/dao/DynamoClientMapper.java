@@ -6,8 +6,6 @@ import com.amazonaws.regions.Regions;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 import com.amazonaws.services.dynamodbv2.document.*;
-import com.amazonaws.services.dynamodbv2.document.spec.GetItemSpec;
-import com.amazonaws.services.dynamodbv2.model.KeysAndAttributes;
 import main.java.model.Restaurant;
 import org.springframework.context.annotation.PropertySource;
 
@@ -40,7 +38,34 @@ public class DynamoClientMapper {
     private String accessKeyId = "AKIAJSGO3QGNX66I5WQA";
     private String secretKeyId = "esz7ufxQ8JrFevYPUhfrs5TCQEbK+YE3Mq5nFIoq";
 
-    public void initAWSCreds() {
+    private Map<String, Restaurant> restaurantMap;
+    private Map<String, List<String>> cityMap;
+    private Map<String, Map<String, List<String>>> cityLabelMap;
+    private List<String> labelList;
+    private List<String> cityList;
+
+    public DynamoClientMapper() {
+        initAWSCreds();
+        createRestaurantMap();
+        createLabelList();
+        createCityList();
+        createCityMap();
+        createCityLabelMap();
+    }
+
+    public Map<String, Restaurant> getRestaurantMap() {
+        return this.restaurantMap;
+    }
+
+    public Map<String, List<String>> getCityMap() {
+        return this.cityMap;
+    }
+
+    public Map<String, Map<String, List<String>>> getCityLabelMap() {
+        return this.cityLabelMap;
+    }
+
+    private void initAWSCreds() {
         /* Hard coding AWS credentials until we figure out how to get values from properties */
         BasicAWSCredentials awsCreds = new BasicAWSCredentials(accessKeyId, secretKeyId);
 
@@ -50,31 +75,16 @@ public class DynamoClientMapper {
                 .withCredentials(new AWSStaticCredentialsProvider(awsCreds))
                 .build();
 
-        dynamoDB = new DynamoDB(client);
+        this.dynamoDB = new DynamoDB(client);
     }
 
-    public void readRestaurantItem(String id) throws Exception {
+    private void createRestaurantMap() {
 
-        Table table = dynamoDB.getTable("restaurant");
-
-        GetItemSpec spec = new GetItemSpec().withPrimaryKey("restaurant-id", id);
-
-        try {
-            System.out.println("Attempting to read the item...");
-            Item outcome = table.getItem(spec);
-            System.out.println("GetItem succeeded: " + outcome.toJSONPretty());
-        } catch (Exception e) {
-            System.err.println("Unable to read item: " + id);
-            System.err.println(e.getMessage());
-        }
-    }
-
-    public List<Restaurant> scanTable(String tableName) {
-
+        String tableName = "restaurant";
         Table table = dynamoDB.getTable(tableName);
 
 //         Arbitrarily chose LinkedList as List implementation
-        List<Restaurant> restaurantList = new LinkedList<Restaurant>();
+        Map<String, Restaurant> restaurantMap = new HashMap<>();
 
         try {
             ItemCollection<ScanOutcome> items = table.scan();
@@ -83,7 +93,8 @@ public class DynamoClientMapper {
             while (iter.hasNext()) {
                 Item item = iter.next();
 
-                Restaurant restaurant = new Restaurant(item.getString("restaurant-id"));
+                String restaurantId = item.getString("restaurant-id");
+                Restaurant restaurant = new Restaurant(restaurantId);
 
                 restaurant.setAddress(item.getStringSet("address"));
                 restaurant.setCity(item.getString("city"));
@@ -111,7 +122,7 @@ public class DynamoClientMapper {
                 restaurant.setStateCode(item.getString("state_code"));
                 restaurant.setUrl(item.getString("url"));
 
-                restaurantList.add(restaurant);
+                restaurantMap.put(restaurantId, restaurant);
 //                Print out all restaurants in JSON format
 //                System.out.println(item.toJSONPretty());
             }
@@ -121,9 +132,125 @@ public class DynamoClientMapper {
             System.err.println(e.getMessage());
         }
 
-        return restaurantList;
+        this.restaurantMap = restaurantMap;
     }
 
+    private void createLabelList() {
+
+        String tableName = "label";
+        Table table = dynamoDB.getTable(tableName);
+
+//         Arbitrarily chose LinkedList as List implementation
+        List<String> labelList = new LinkedList<>();
+
+        try {
+            ItemCollection<ScanOutcome> items = table.scan();
+
+            Iterator<Item> iter = items.iterator();
+            while (iter.hasNext()) {
+                Item item = iter.next();
+                labelList.add(item.getString("label-id"));
+            }
+
+        } catch (Exception e) {
+            System.err.println("Unable to scan the table:");
+            System.err.println(e.getMessage());
+        }
+
+        this.labelList = labelList;
+    }
+
+    public void createCityList() {
+
+        String tableName = "restaurant";
+        Table table = dynamoDB.getTable(tableName);
+
+        List<String> cityList = new LinkedList<>();
+
+        try {
+            ItemCollection<ScanOutcome> items = table.scan();
+
+            Iterator<Item> iter = items.iterator();
+            while (iter.hasNext()) {
+                Item item = iter.next();
+                String city = item.getString("city");
+                if (!cityList.contains(city)) {
+                    cityList.add(city);
+                }
+            }
+        } catch (Exception e) {
+            System.err.println("Unable to scan the table:");
+            System.err.println(e.getMessage());
+        }
+
+        this.cityList = cityList;
+    }
+
+    private void createCityMap() {
+
+        Map<String, List<String>> cityMap = new HashMap<>();
+
+        try {
+            /* initializing filterMap */
+            for (String city: cityList) {
+                List<String> restaurantIdList = new LinkedList<>();
+                cityMap.put(city, restaurantIdList);
+            }
+
+            Collection<Restaurant> restaurantCollection = restaurantMap.values();
+            Iterator<Restaurant> iter = restaurantCollection.iterator();
+            while (iter.hasNext()){
+                Restaurant restaurant = iter.next();
+                String city = restaurant.getCity();
+                String restaurantId = restaurant.getRestaurantId();
+                cityMap.get(city).add(restaurantId);
+            }
+        } catch (Exception e) {
+            System.err.println("Unable to create filter table:");
+            System.err.println(e.getMessage());
+        }
+
+        this.cityMap = cityMap;
+    }
+
+    private void createCityLabelMap() {
+
+        String tableName = "restaurant-label";
+        Table table = dynamoDB.getTable(tableName);
+
+        Map<String, Map<String, List<String>>> cityLabelMap = new HashMap<>();
+
+        try {
+            /* initializing filterMap */
+            for (String city: cityList) {
+                Map<String, List<String>> labelMap = new HashMap<>();
+                for (String label: labelList) {
+                    List<String> restaurantIdList = new LinkedList<>();
+                    labelMap.put(label, restaurantIdList);
+                }
+                cityLabelMap.put(city, labelMap);
+            }
+
+            ItemCollection<ScanOutcome> items = table.scan();
+
+            Iterator<Item> iter = items.iterator();
+            while (iter.hasNext()) {
+                Item item = iter.next();
+                String labelId = item.getString("label-id");
+                String restaurantId = item.getString("restaurant-id");
+                if (restaurantMap.containsKey(restaurantId)) {
+                    Restaurant restaurant = restaurantMap.get(restaurantId);
+                    String city = restaurant.getCity();
+                    cityLabelMap.get(city).get(labelId).add(restaurantId);
+                }
+            }
+        } catch (Exception e) {
+            System.err.println("Unable to create filter table:");
+            System.err.println(e.getMessage());
+        }
+
+        this.cityLabelMap = cityLabelMap;
+    }
 
 //    private AWSCredentials awsCredentials = new AWSCredentials() {
 //        @Override
