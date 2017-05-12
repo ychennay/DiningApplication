@@ -13,10 +13,10 @@ public interface ReviewService {
 
     Review getReviewById(int id);
 
-    Review saveReview(Review review);
-
-    Review updateReview(int id);
+    Review updateReview(Review review);
 
     Review deleteReview(int id);
+
+    Review createReview(Review review);
 
 }

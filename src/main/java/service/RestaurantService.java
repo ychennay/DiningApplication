@@ -15,6 +15,9 @@ public interface RestaurantService {
 
     List<Restaurant> randomFiveRestaurants(String city, String label);
 
+    Restaurant updateRestaurantById(String restaurantId);
+
+
 //    List<Restaurant> listAllRestaurants();
 //
 //    void setRestaurantList(List<Restaurant> restaurantList);

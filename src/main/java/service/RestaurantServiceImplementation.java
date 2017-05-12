@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import main.java.dao.DynamoClientMapper;
 import main.java.model.Restaurant;
+import org.apache.log4j.Logger;
+import org.apache.log4j.spi.LoggerFactory;
 import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -27,7 +29,9 @@ public class RestaurantServiceImplementation implements RestaurantService {
     private Map<String, Restaurant> restaurantMap;
     private Map<String, List<String>> cityMap;
     private Map<String, Map<String, List<String>>> cityLabelMap;
+    private static Logger logger = Logger.getLogger(RestaurantServiceImplementation.class.getName());
 
+<<<<<<< HEAD
     private DynamoClientMapper dynamoClientMapper;
 
     @Autowired
@@ -36,9 +40,18 @@ public class RestaurantServiceImplementation implements RestaurantService {
         restaurantMap = this.dynamoClientMapper.getRestaurantMap();
         cityMap = this.dynamoClientMapper.getCityMap();
         cityLabelMap = this.dynamoClientMapper.getCityLabelMap();
+=======
+    public RestaurantServiceImplementation() {
+        logger.info("RestaurantServiceImplementation initialized");
+        DynamoClientMapper dynamoClientMapper = new DynamoClientMapper();
+        restaurantMap = dynamoClientMapper.getRestaurantMap();
+        cityMap = dynamoClientMapper.getCityMap();
+        cityLabelMap = dynamoClientMapper.getCityLabelMap();
+>>>>>>> ae8e456aa72f593b1420e9b8e2e8c6a315b6e026
     }
 
     public Restaurant getRestaurantById(String restaurantId){
+        logger.info("getRestaurantById method called");
         return restaurantMap.get(restaurantId);
     }
 
@@ -60,8 +73,6 @@ public class RestaurantServiceImplementation implements RestaurantService {
             System.err.println("Unable to retrieve random five restaurants:");
             System.err.println(e.getMessage());
         }
-
-//        System.out.println(restaurantList);
 
         return restaurantList;
     }
@@ -85,38 +96,11 @@ public class RestaurantServiceImplementation implements RestaurantService {
             System.err.println(e.getMessage());
         }
 
-//        System.out.println(restaurantList);
-
         return restaurantList;
     }
 
-    //    private List<Restaurant> restaurantList = new LinkedList<>();
-//
-//    public List<Restaurant> listAllRestaurants() {
-//        return restaurantList;
-//    }
-//
-//    public void setRestaurantList(List<Restaurant> restaurantList) {
-//        ;
-//    }
-//
-//    public Restaurant searchIndex(int index) {
-//        return restaurantList.get(index);
-//    }
-
-//    public Restaurant saveRestaurant(Restaurant restaurant){
-//        restaurant.setId((int)Math.random());
-//        restaurants.add(restaurant);
-//        return restaurant;
-//    }
-
-//    @Override
-//    public Restaurant updateRestaurant(int id) {
-//        return null;
-//    }
-//
-//    @Override
-//    public Restaurant deleteRestaurant(int id) {
-//        return null;
-//    }
+    @Override
+    public Restaurant updateRestaurantById(String restaurantId) {
+        return null;
+    }
 }

@@ -41,20 +41,4 @@ public class RestaurantRestController extends GenericRestController{
         throws Exception {
         return restaurantService.randomFiveRestaurants(city, label);
     }
-
-//    @GetMapping("/api/restaurants")
-//    public String getRestaurants() {
-//        return "Here would appear a list of restaurants";
-//    }
-
-//    @GetMapping("api/restaurantcreate")
-//    public String getRestaurant(){
-//        Restaurant restaurant = new Restaurant();
-//        restaurant.setId(2);
-//        restaurant.setName("Il Tram");
-//        System.out.println("restaurante");
-//        DynamoClientMapper dynamoClientMapper = new DynamoClientMapper();
-//        dynamoClientMapper.getMapper().save(restaurant);
-//        return restaurant.toString();
-//    }
 }
