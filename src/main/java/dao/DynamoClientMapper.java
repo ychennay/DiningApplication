@@ -7,29 +7,33 @@ import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 import com.amazonaws.services.dynamodbv2.document.*;
 import main.java.model.Restaurant;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
+import org.springframework.stereotype.Component;
 
 import java.util.*;
 
 @PropertySource(value = "database.properties", ignoreResourceNotFound = true)
 public class DynamoClientMapper {
 
-/* For now, hard coding aws credentials
-    @Value("${amazon.dynamodb.endpoint}")
-    private String amazonDynamoDBEndpoint;
 
-    @Value("${amazon.aws.accesskey:'key1'}")
-    private String amazonAWSAccessKey;
-
-    @Value("${amazon.aws.secretkey:'key2'}")
-    private String amazonAWSSecretKey;
-
-    @Value("${amazon.aws.region:'us-west-1'}")
-    private String amazonAWSRegion;
-*/
+//    @Value("${amazon.aws.accesskey:'key1'}")
+//    private String amazonAWSAccessKey;
+//
+//    @Value("${amazon.aws.secretkey:'key2'}")
+//    private String amazonAWSSecretKey;
+//
+//    @Value("${amazon.aws.region:'us-west-1'}")
+//    private String amazonAWSRegion;
 
     private DynamoDB dynamoDB;
     private AmazonDynamoDB client;
+
+    public DynamoDB getDynamoDB() {
+        return dynamoDB;
+    }
 
     // Endpoint will later change to actual url accessible via internet
     private String endpoint = "http://localhost:8000/";
@@ -64,6 +68,8 @@ public class DynamoClientMapper {
     public Map<String, Map<String, List<String>>> getCityLabelMap() {
         return this.cityLabelMap;
     }
+
+
 
     private void initAWSCreds() {
         /* Hard coding AWS credentials until we figure out how to get values from properties */
@@ -251,22 +257,4 @@ public class DynamoClientMapper {
 
         this.cityLabelMap = cityLabelMap;
     }
-
-//    private AWSCredentials awsCredentials = new AWSCredentials() {
-//        @Override
-//        public String getAWSAccessKeyId() {
-//            return null;
-//        }
-//
-//        @Override
-//        public String getAWSSecretKey() {
-//            return null;
-//        }
-//    };
-//    private DynamoDBMapper mapper = new DynamoDBMapper(amazonDynamoDB);
-//
-//    public DynamoDBMapper getMapper() {
-//        return mapper;
-//    }
-
 }

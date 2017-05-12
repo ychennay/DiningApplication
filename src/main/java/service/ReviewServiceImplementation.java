@@ -1,11 +1,21 @@
 package main.java.service;
 
 
+import com.amazonaws.services.dynamodbv2.document.DynamoDB;
+import com.amazonaws.services.dynamodbv2.document.Table;
+import com.amazonaws.services.dynamodbv2.document.UpdateItemOutcome;
+import com.amazonaws.services.dynamodbv2.document.spec.UpdateItemSpec;
+import com.amazonaws.services.dynamodbv2.document.utils.ValueMap;
+import com.amazonaws.services.dynamodbv2.model.ReturnValue;
+import javafx.scene.control.Tab;
+import main.java.dao.DynamoClientMapper;
 import main.java.model.Review;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by ychen4 on 4/30/2017.
@@ -14,20 +24,50 @@ import java.util.List;
 @Component
 public class ReviewServiceImplementation implements ReviewService{
 
+    private static Logger logger = Logger.getLogger(ReviewServiceImplementation.class.getName());
     private static List<Review> reviews;
-    {
+    public ReviewServiceImplementation(){
+        logger.info("ReviewServiceImplementation initialized");
+        DynamoClientMapper dynamoClientMapper = new DynamoClientMapper();
+
+        
         reviews = new ArrayList();
-        reviews.add(new Review(1, "ychennay", "This restaurant was terrific!"));
-        reviews.add(new Review(2, "david", "This restaurant was okay!"));
-        reviews.add(new Review(3, "ben", "This restaurant was mediocre!"));
-        reviews.add(new Review(4, "leon", "This restaurant was awful!"));
-        reviews.add(new Review(5, "lawrence", "This restaurant was confusing!"));
+        reviews.add(new Review(1, "ychennay", "This restaurant was terrific!", "04-30-2001"));
+        reviews.add(new Review(2, "david", "This restaurant was okay!", "09-11-2000"));
+        reviews.add(new Review(3, "ben", "This restaurant was mediocre!", "08-31-1923"));
+        reviews.add(new Review(4, "leon", "This restaurant was awful!", "03-01-2001"));
+        reviews.add(new Review(5, "lawrence", "This restaurant was confusing!", "03-01-2001"));
     }
 
 
-    public Review create(Review review){
-        return null;
+    public Review createReview(Review review){
+        DynamoClientMapper clientMapper = new DynamoClientMapper();
+        DynamoDB dynamoDB = clientMapper.getDynamoDB();
+        Table reviewTable = dynamoDB.getTable("restaurant-review");
+
+        UpdateItemSpec updateItemSpec = new UpdateItemSpec()
+                .withPrimaryKey("id", review.getId())
+                .withUpdateExpression("set ReviewDate = :r," +
+                        "ReviewText =:t," +
+                        "UserName =:u")
+                .withValueMap(new ValueMap()
+                        .withString(":r", review.getReviewDate())
+                        .withString(":t", review.getReviewText())
+                        .withString("u", review.getUserName()))
+                .withReturnValues(ReturnValue.UPDATED_NEW);
+
+        try{
+            logger.info("Updating item " + review.toString());
+            UpdateItemOutcome outcome = reviewTable.updateItem(updateItemSpec);
+            logger.info("Update succeeded:\n" + outcome.getItem().toJSONPretty());
+            return review;
+        } catch (Exception e){
+            logger.error("Unable to update the item: " + review);
+            logger.error(e.getMessage());
+            return null;
+        }
     }
+
 
 
     @Override
@@ -53,7 +93,7 @@ public class ReviewServiceImplementation implements ReviewService{
     }
 
     @Override
-    public Review updateReview(int id) {
+    public Review updateReview(Review review) {
         return null;
     }
 

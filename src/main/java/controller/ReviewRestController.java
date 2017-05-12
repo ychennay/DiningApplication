@@ -30,9 +30,9 @@ public class ReviewRestController extends GenericRestController{
         return new ResponseEntity(review, HttpStatus.OK);
     }
 
-    @PostMapping("/api/reviews")
+    @PostMapping("/api/reviews/create")
     public ResponseEntity createReview(@RequestBody Review review){
-        reviewServiceImplementation.create(review);
+        reviewServiceImplementation.createReview(review);
         return new ResponseEntity(review, HttpStatus.OK);
     }
 

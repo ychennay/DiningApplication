@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import main.java.dao.DynamoClientMapper;
 import main.java.model.Restaurant;
+import org.apache.log4j.Logger;
+import org.apache.log4j.spi.LoggerFactory;
 import org.json.JSONArray;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,8 +29,10 @@ public class RestaurantServiceImplementation implements RestaurantService {
     private Map<String, Restaurant> restaurantMap;
     private Map<String, List<String>> cityMap;
     private Map<String, Map<String, List<String>>> cityLabelMap;
+    private static Logger logger = Logger.getLogger(RestaurantServiceImplementation.class.getName());
 
     public RestaurantServiceImplementation() {
+        logger.info("RestaurantServiceImplementation initialized");
         DynamoClientMapper dynamoClientMapper = new DynamoClientMapper();
         restaurantMap = dynamoClientMapper.getRestaurantMap();
         cityMap = dynamoClientMapper.getCityMap();
@@ -36,6 +40,7 @@ public class RestaurantServiceImplementation implements RestaurantService {
     }
 
     public Restaurant getRestaurantById(String restaurantId){
+        logger.info("getRestaurantById method called");
         return restaurantMap.get(restaurantId);
     }
 
@@ -57,8 +62,6 @@ public class RestaurantServiceImplementation implements RestaurantService {
             System.err.println("Unable to retrieve random five restaurants:");
             System.err.println(e.getMessage());
         }
-
-//        System.out.println(restaurantList);
 
         return restaurantList;
     }
@@ -82,38 +85,11 @@ public class RestaurantServiceImplementation implements RestaurantService {
             System.err.println(e.getMessage());
         }
 
-//        System.out.println(restaurantList);
-
         return restaurantList;
     }
 
-    //    private List<Restaurant> restaurantList = new LinkedList<>();
-//
-//    public List<Restaurant> listAllRestaurants() {
-//        return restaurantList;
-//    }
-//
-//    public void setRestaurantList(List<Restaurant> restaurantList) {
-//        ;
-//    }
-//
-//    public Restaurant searchIndex(int index) {
-//        return restaurantList.get(index);
-//    }
-
-//    public Restaurant saveRestaurant(Restaurant restaurant){
-//        restaurant.setId((int)Math.random());
-//        restaurants.add(restaurant);
-//        return restaurant;
-//    }
-
-//    @Override
-//    public Restaurant updateRestaurant(int id) {
-//        return null;
-//    }
-//
-//    @Override
-//    public Restaurant deleteRestaurant(int id) {
-//        return null;
-//    }
+    @Override
+    public Restaurant updateRestaurantById(String restaurantId) {
+        return null;
+    }
 }

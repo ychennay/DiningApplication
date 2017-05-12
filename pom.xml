@@ -108,7 +108,6 @@
             <artifactId>aws-java-sdk-bom</artifactId>
             <version>${aws-sdk-java-version}</version>
             <type>pom</type>
-            <!-- <scope>import</scope> -->
             <scope>provided</scope> <!-- changed import to provided -->
         </dependency>
         <dependency>
