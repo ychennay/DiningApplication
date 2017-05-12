@@ -19,8 +19,12 @@ import java.util.List;
 @RestController
 public class RestaurantRestController extends GenericRestController{
 
-    @Autowired
     private RestaurantServiceImplementation restaurantService;
+
+    @Autowired
+    public RestaurantRestController(RestaurantServiceImplementation restaurantService) {
+        this.restaurantService = restaurantService;
+    }
 
     @GetMapping("/api/restaurant/{restaurantId}")
     public Restaurant getRestaurantById(@PathVariable("restaurantId") String restaurantId) throws Exception {

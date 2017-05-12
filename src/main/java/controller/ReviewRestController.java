@@ -13,8 +13,12 @@ import java.util.List;
 @RestController
 public class ReviewRestController extends GenericRestController{
 
-    @Autowired
     private ReviewServiceImplementation reviewServiceImplementation;
+
+    @Autowired
+    public ReviewRestController(ReviewServiceImplementation reviewServiceImplementation) {
+        this.reviewServiceImplementation = reviewServiceImplementation;
+    }
 
     @GetMapping("/api/reviews")
     public List getReviews() {

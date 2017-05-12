@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 import main.java.dao.DynamoClientMapper;
 import main.java.model.Restaurant;
 import org.json.JSONArray;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,18 +22,20 @@ import java.util.Random;
  */
 
 @Component
-@RestController
 public class RestaurantServiceImplementation implements RestaurantService {
 
     private Map<String, Restaurant> restaurantMap;
     private Map<String, List<String>> cityMap;
     private Map<String, Map<String, List<String>>> cityLabelMap;
 
-    public RestaurantServiceImplementation() {
-        DynamoClientMapper dynamoClientMapper = new DynamoClientMapper();
-        restaurantMap = dynamoClientMapper.getRestaurantMap();
-        cityMap = dynamoClientMapper.getCityMap();
-        cityLabelMap = dynamoClientMapper.getCityLabelMap();
+    private DynamoClientMapper dynamoClientMapper;
+
+    @Autowired
+    public RestaurantServiceImplementation(DynamoClientMapper dynamoClientMapper) {
+        this.dynamoClientMapper = dynamoClientMapper;
+        restaurantMap = this.dynamoClientMapper.getRestaurantMap();
+        cityMap = this.dynamoClientMapper.getCityMap();
+        cityLabelMap = this.dynamoClientMapper.getCityLabelMap();
     }
 
     public Restaurant getRestaurantById(String restaurantId){

@@ -8,9 +8,11 @@ import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 import com.amazonaws.services.dynamodbv2.document.*;
 import main.java.model.Restaurant;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.stereotype.Component;
 
 import java.util.*;
 
+@Component
 @PropertySource(value = "database.properties", ignoreResourceNotFound = true)
 public class DynamoClientMapper {
 
