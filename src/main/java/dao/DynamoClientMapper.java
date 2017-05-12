@@ -7,13 +7,7 @@ import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 import com.amazonaws.services.dynamodbv2.document.*;
 import main.java.model.Restaurant;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
-<<<<<<< HEAD
-=======
-import org.springframework.core.env.Environment;
->>>>>>> ae8e456aa72f593b1420e9b8e2e8c6a315b6e026
 import org.springframework.stereotype.Component;
 
 import java.util.*;

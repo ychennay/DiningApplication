@@ -31,23 +31,15 @@ public class RestaurantServiceImplementation implements RestaurantService {
     private Map<String, Map<String, List<String>>> cityLabelMap;
     private static Logger logger = Logger.getLogger(RestaurantServiceImplementation.class.getName());
 
-<<<<<<< HEAD
     private DynamoClientMapper dynamoClientMapper;
 
     @Autowired
     public RestaurantServiceImplementation(DynamoClientMapper dynamoClientMapper) {
+        logger.info("RestaurantServiceImplementation initialized");
         this.dynamoClientMapper = dynamoClientMapper;
         restaurantMap = this.dynamoClientMapper.getRestaurantMap();
         cityMap = this.dynamoClientMapper.getCityMap();
         cityLabelMap = this.dynamoClientMapper.getCityLabelMap();
-=======
-    public RestaurantServiceImplementation() {
-        logger.info("RestaurantServiceImplementation initialized");
-        DynamoClientMapper dynamoClientMapper = new DynamoClientMapper();
-        restaurantMap = dynamoClientMapper.getRestaurantMap();
-        cityMap = dynamoClientMapper.getCityMap();
-        cityLabelMap = dynamoClientMapper.getCityLabelMap();
->>>>>>> ae8e456aa72f593b1420e9b8e2e8c6a315b6e026
     }
 
     public Restaurant getRestaurantById(String restaurantId){
