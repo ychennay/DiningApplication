@@ -37,8 +37,9 @@ public class DynamoClientMapper {
     private String endpoint = "http://localhost:8000/";
     // Data are stored in AWS DynamoDB Oregon
     private String region = "us-west-2";
-    private String accessKeyId = "AKIAJSGO3QGNX66I5WQA";
-    private String secretKeyId = "esz7ufxQ8JrFevYPUhfrs5TCQEbK+YE3Mq5nFIoq";
+    // Will work on retrieving access key and secret key from environment variable
+    private String accessKeyId = "xxxxx";
+    private String secretKeyId = "xxxxx";
 
     private Map<String, Restaurant> restaurantMap;
     private Map<String, List<String>> cityMap;
