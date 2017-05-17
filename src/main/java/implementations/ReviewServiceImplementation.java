@@ -1,4 +1,4 @@
-package main.java.service;
+package main.java.implementations;
 
 
 import com.amazonaws.services.dynamodbv2.document.DynamoDB;
@@ -7,22 +7,21 @@ import com.amazonaws.services.dynamodbv2.document.UpdateItemOutcome;
 import com.amazonaws.services.dynamodbv2.document.spec.UpdateItemSpec;
 import com.amazonaws.services.dynamodbv2.document.utils.ValueMap;
 import com.amazonaws.services.dynamodbv2.model.ReturnValue;
-import javafx.scene.control.Tab;
 import main.java.dao.DynamoClientMapper;
 import main.java.model.Review;
+import main.java.service.ReviewService;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by ychen4 on 4/30/2017.
  */
 
 @Component
-public class ReviewServiceImplementation implements ReviewService{
+public class ReviewServiceImplementation implements ReviewService {
 
     private static Logger logger = Logger.getLogger(ReviewServiceImplementation.class.getName());
     private static List<Review> reviews;
@@ -30,7 +29,7 @@ public class ReviewServiceImplementation implements ReviewService{
         logger.info("ReviewServiceImplementation initialized");
         DynamoClientMapper dynamoClientMapper = new DynamoClientMapper();
 
-        
+
         reviews = new ArrayList();
         reviews.add(new Review(1, "ychennay", "This restaurant was terrific!", "04-30-2001"));
         reviews.add(new Review(2, "david", "This restaurant was okay!", "09-11-2000"));
@@ -55,7 +54,6 @@ public class ReviewServiceImplementation implements ReviewService{
                         .withString(":t", review.getReviewText())
                         .withString("u", review.getUserName()))
                 .withReturnValues(ReturnValue.UPDATED_NEW);
-
         try{
             logger.info("Updating item " + review.toString());
             UpdateItemOutcome outcome = reviewTable.updateItem(updateItemSpec);

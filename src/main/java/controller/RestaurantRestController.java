@@ -1,11 +1,7 @@
 package main.java.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
 import main.java.model.Restaurant;
-import main.java.service.RestaurantService;
-import main.java.service.RestaurantServiceImplementation;
-import org.json.JSONArray;
+import main.java.implementations.RestaurantServiceImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -41,4 +37,5 @@ public class RestaurantRestController extends GenericRestController{
         throws Exception {
         return restaurantService.randomFiveRestaurants(city, label);
     }
+
 }

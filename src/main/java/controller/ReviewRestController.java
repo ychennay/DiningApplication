@@ -2,7 +2,7 @@ package main.java.controller;
 
 
 import main.java.model.Review;
-import main.java.service.ReviewServiceImplementation;
+import main.java.implementations.ReviewServiceImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

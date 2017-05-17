@@ -1,18 +1,12 @@
-package main.java.service;
+package main.java.implementations;
 
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
 import main.java.dao.DynamoClientMapper;
 import main.java.model.Restaurant;
+import main.java.service.RestaurantService;
 import org.apache.log4j.Logger;
-import org.apache.log4j.spi.LoggerFactory;
-import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -95,4 +89,6 @@ public class RestaurantServiceImplementation implements RestaurantService {
     public Restaurant updateRestaurantById(String restaurantId) {
         return null;
     }
+
+
 }
