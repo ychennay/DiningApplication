@@ -5,4 +5,4 @@
 /.idea/*
 /target/
 /Dining.iml
-database.properties
+/resources/database.properties
