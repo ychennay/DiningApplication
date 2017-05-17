@@ -19,6 +19,57 @@ public class PropertyConfiguration {
     private String accessKey;
     private String secretKey;
     private String yelpEndpoint;
+    private String yelpClientSecret;
+    private String yelpClientId;
+    private String accessTokenEndpoint;
+    private String yelpGrantType;
+
+    public String getYelpGrantType() {
+        return yelpGrantType;
+    }
+
+    public void setYelpGrantType(String yelpGrantType) {
+        this.yelpGrantType = yelpGrantType;
+    }
+
+    @Override
+    public String toString() {
+        return "PropertyConfiguration{" +
+                "endpoint='" + endpoint + '\'' +
+                ", region='" + region + '\'' +
+                ", accessKey='" + accessKey + '\'' +
+                ", secretKey='" + secretKey + '\'' +
+                ", yelpEndpoint='" + yelpEndpoint + '\'' +
+                ", yelpClientSecret='" + yelpClientSecret + '\'' +
+                ", yelpClientId='" + yelpClientId + '\'' +
+                ", accessTokenEndpoint='" + accessTokenEndpoint + '\'' +
+                ", yelpGrantType='" + yelpGrantType + '\'' +
+                '}';
+    }
+
+    public String getAccessTokenEndpoint() {
+        return accessTokenEndpoint;
+    }
+
+    public void setAccessTokenEndpoint(String accessTokenEndpoint) {
+        this.accessTokenEndpoint = accessTokenEndpoint;
+    }
+
+    public String getYelpClientSecret() {
+        return yelpClientSecret;
+    }
+
+    public void setYelpClientSecret(String yelpClientSecret) {
+        this.yelpClientSecret = yelpClientSecret;
+    }
+
+    public String getYelpClientId() {
+        return yelpClientId;
+    }
+
+    public void setYelpClientId(String yelpClientId) {
+        this.yelpClientId = yelpClientId;
+    }
 
     public String getYelpEndpoint() {
         return yelpEndpoint;
@@ -34,17 +85,6 @@ public class PropertyConfiguration {
 
     public void setEndpoint(String endpoint) {
         this.endpoint = endpoint;
-    }
-
-    @Override
-    public String toString() {
-        return "PropertyConfiguration{" +
-                "endpoint='" + endpoint + '\'' +
-                ", region='" + region + '\'' +
-                ", accessKey='" + accessKey + '\'' +
-                ", secretKey='" + secretKey + '\'' +
-                ", yelpEndpoint='" + yelpEndpoint + '\'' +
-                '}';
     }
 
     public PropertyConfiguration() {

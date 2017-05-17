@@ -12,5 +12,9 @@
         <property name="region" value="${amazon.dynamodb.region}"/>
         <property name="secretKey" value="${amazon.secretkey}"/>
         <property name="yelpEndpoint" value="${yelp.fusion.endpoint}"/>
+        <property name="yelpClientId" value="${yelp.fusion.clientID}"/>
+        <property name="yelpClientSecret" value="${yelp.fusion.clientSecret}"/>
+        <property name="accessTokenEndpoint" value="${yelp.fusion.accessTokenEndpoint}"/>
+        <property name="yelpGrantType" value="${yelp.fusion.grantType}"/>
     </bean>
 </beans>

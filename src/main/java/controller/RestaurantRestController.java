@@ -1,12 +1,14 @@
 package main.java.controller;
 
+import main.java.implementations.YelpServiceImplementation;
 import main.java.model.Restaurant;
 import main.java.implementations.RestaurantServiceImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.List;
 
 /**
@@ -16,10 +18,12 @@ import java.util.List;
 public class RestaurantRestController extends GenericRestController{
 
     private RestaurantServiceImplementation restaurantService;
+    private YelpServiceImplementation yelpService;
 
     @Autowired
-    public RestaurantRestController(RestaurantServiceImplementation restaurantService) {
+    public RestaurantRestController(RestaurantServiceImplementation restaurantService, YelpServiceImplementation yelpService) {
         this.restaurantService = restaurantService;
+        this.yelpService = yelpService;
     }
 
     @GetMapping("/api/restaurant/{restaurantId}")
@@ -37,5 +41,11 @@ public class RestaurantRestController extends GenericRestController{
         throws Exception {
         return restaurantService.randomFiveRestaurants(city, label);
     }
+
+    @GetMapping("/yelp")
+    public HttpStatus getAccessToken() throws IOException {
+        return yelpService.generateAccessToken();
+    }
+
 
 }
