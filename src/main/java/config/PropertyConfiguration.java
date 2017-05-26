@@ -13,7 +13,6 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
 public class PropertyConfiguration {
 
-
     private String endpoint;
     private String region;
     private String accessKey;
@@ -22,7 +21,10 @@ public class PropertyConfiguration {
     private String yelpClientSecret;
     private String yelpClientId;
     private String accessTokenEndpoint;
+    private String yelpAccessToken;
     private String yelpGrantType;
+    private String restaurantSearchEndpoint;
+
 
     public String getYelpGrantType() {
         return yelpGrantType;
@@ -113,5 +115,21 @@ public class PropertyConfiguration {
 
     public void setSecretKey(String secretKey) {
         this.secretKey = secretKey;
+    }
+
+    public String getYelpAccessToken() {
+        return yelpAccessToken;
+    }
+
+    public void setYelpAccessToken(String yelpAccessToken) {
+        this.yelpAccessToken = yelpAccessToken;
+    }
+
+    public String getRestaurantSearchEndpoint() {
+        return restaurantSearchEndpoint;
+    }
+
+    public void setRestaurantSearchEndpoint(String restaurantSearchEndpoint) {
+        this.restaurantSearchEndpoint = restaurantSearchEndpoint;
     }
 }
