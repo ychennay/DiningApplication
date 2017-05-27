@@ -12,6 +12,7 @@ import main.java.model.Review;
 import main.java.service.ReviewService;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +21,7 @@ import java.util.List;
  * Created by ychen4 on 4/30/2017.
  */
 
-@Component
+@Service
 public class ReviewServiceImplementation implements ReviewService {
 
     private static Logger logger = Logger.getLogger(ReviewServiceImplementation.class.getName());
@@ -28,7 +29,6 @@ public class ReviewServiceImplementation implements ReviewService {
     public ReviewServiceImplementation(){
         logger.info("ReviewServiceImplementation initialized");
         DynamoClientMapper dynamoClientMapper = new DynamoClientMapper();
-
 
         reviews = new ArrayList();
         reviews.add(new Review(1, "ychennay", "This restaurant was terrific!", "04-30-2001"));

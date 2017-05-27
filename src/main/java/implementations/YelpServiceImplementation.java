@@ -20,6 +20,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -32,7 +33,7 @@ import java.util.Properties;
 /**
  * Created by ychen4 on 5/16/2017.
  */
-@Component
+@Service
 public class YelpServiceImplementation implements YelpService {
 
     private static final Logger logger = Logger.getLogger(App.class.toString());
@@ -48,7 +49,7 @@ public class YelpServiceImplementation implements YelpService {
     }
 
     @Override
-    public String retrieveRestaurant(String restaurantName) throws MalformedURLException {
+    public String retrieveRestaurants(String restaurantName) throws MalformedURLException {
 
         String baseUrl = properties.getRestaurantSearchEndpoint();
         baseUrl += "?latitude=" + Constants.LOS_ANGELES_LATITUDE;
@@ -61,9 +62,8 @@ public class YelpServiceImplementation implements YelpService {
             connection.setRequestMethod("GET");
             connection.setRequestProperty("Authorization", "Bearer " + properties.getYelpAccessToken());
             logger.info(baseUrl);
-            String stringResponse = RequestResponseUtility.convertStreamToString(connection.getInputStream());
+            String stringResponse = RequestResponseUtility.convertStreamtoJson(connection.getInputStream()).toString();
             return  stringResponse;
-
 
         } catch (IOException e) {
             e.printStackTrace();

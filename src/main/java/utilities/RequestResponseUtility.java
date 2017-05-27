@@ -14,35 +14,42 @@ import java.io.InputStreamReader;
  */
 public class RequestResponseUtility {
 
-    private static StringBuilder readStream(InputStream inputStream){
+    private static StringBuilder readStream(InputStream inputStream) throws IOException {
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
         StringBuilder stringBuilder = new StringBuilder();
 
-        String line = null;
+        String line;
+
         try {
             while ((line = reader.readLine()) != null){
                 stringBuilder.append(line + "\n");
             }
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
+            throw e;
+        }
+       finally {
             try{
                 inputStream.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            return stringBuilder;
         }
-
+        return stringBuilder;
     }
 
 
-    public static String convertStreamToString(InputStream inputStream) {
-        return readStream(inputStream).toString();
+    public static String convertStreamToString(InputStream inputStream) throws IOException {
+        try {
+            return readStream(inputStream).toString();
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw e;
+        }
     }
 
-    public static JSONObject convertStreamtoJson(InputStream inputStream){
+    public static JSONObject convertStreamtoJson(InputStream inputStream) throws IOException {
         String response = readStream(inputStream).toString();
         try {
             JSONObject jsonObject = new JSONObject(response);

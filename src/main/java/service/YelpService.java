@@ -12,7 +12,7 @@ public interface YelpService {
 
     String retrieveAllRestaurants();
 
-    String retrieveRestaurant(String restaurantName) throws MalformedURLException;
+    String retrieveRestaurants(String restaurantName) throws MalformedURLException;
 
     HttpStatus generateAccessToken() throws IOException;
 }

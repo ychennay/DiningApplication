@@ -25,7 +25,7 @@ public class YelpFusionApiController extends GenericRestController {
     @RequestMapping(value = "/yelp/search/", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody
     String searchForRestaurant(@RequestParam("name") String name) throws MalformedURLException {
-        return yelpServiceImplementation.retrieveRestaurant(name);
+        return yelpServiceImplementation.retrieveRestaurants(name);
     }
 
 }

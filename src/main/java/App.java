@@ -28,8 +28,6 @@ public class App extends SpringBootServletInitializer{
         ConfigurableApplicationContext context =
                 new ClassPathXmlApplicationContext(configFile);
         PropertyConfiguration configuration = (PropertyConfiguration) context.getBean("propertyConfiguration");
-        logger.info(configuration.toString());
-
 
         SpringApplication.run(App.class, args);
 

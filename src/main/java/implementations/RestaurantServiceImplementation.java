@@ -7,6 +7,7 @@ import main.java.service.RestaurantService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -17,7 +18,7 @@ import java.util.Random;
  * Created by ychen4 on 4/30/2017.
  */
 
-@Component
+@Service
 public class RestaurantServiceImplementation implements RestaurantService {
 
     private Map<String, Restaurant> restaurantMap;
