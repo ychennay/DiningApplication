@@ -44,7 +44,20 @@ public class YelpServiceImplementation implements YelpService {
 
 
     @Override
-    public String retrieveAllRestaurants() {
+    public String retrieveAllRestaurants() throws MalformedURLException {
+        String baseUrl = properties.getRestaurantSearchEndpoint();
+        baseUrl += "?latitude=" + Constants.LOS_ANGELES_LATITUDE;
+        baseUrl += "&longitude=" + Constants.LOS_ANGELES_LONGTITUDE;
+        URL url = new URL(baseUrl);
+        try {
+            HttpURLConnection connection = RequestResponseUtility.prepareGetRequest(url);
+            JSONObject jsonObject = RequestResponseUtility.convertStreamToJson(connection.getInputStream());
+            return RequestResponseUtility.prettyPrintJson(jsonObject);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         return null;
     }
 
@@ -58,12 +71,9 @@ public class YelpServiceImplementation implements YelpService {
 
         URL url = new URL(baseUrl);
         try {
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("GET");
-            connection.setRequestProperty("Authorization", "Bearer " + properties.getYelpAccessToken());
-            logger.info(baseUrl);
-            String stringResponse = RequestResponseUtility.convertStreamtoJson(connection.getInputStream()).toString();
-            return  stringResponse;
+            HttpURLConnection connection = RequestResponseUtility.prepareGetRequest(url);
+            JSONObject jsonObject = RequestResponseUtility.convertStreamToJson(connection.getInputStream());
+            return  RequestResponseUtility.prettyPrintJson(jsonObject);
 
         } catch (IOException e) {
             e.printStackTrace();

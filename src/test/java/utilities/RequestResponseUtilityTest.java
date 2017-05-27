@@ -42,9 +42,9 @@ public class RequestResponseUtilityTest extends AbstractTest {
         RequestResponseUtility.convertStreamToString(inputStream);
     }
 
-    @Test
-    public void convertStreamToJsonTest(){
+    @Test(expected = IOException.class)
+    public void convertStreamToJsonNullTest() throws IOException {
+        RequestResponseUtility.convertStreamToJson(inputStream);
 
     }
-
 }

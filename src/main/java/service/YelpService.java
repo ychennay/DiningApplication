@@ -10,7 +10,7 @@ import java.net.MalformedURLException;
  */
 public interface YelpService {
 
-    String retrieveAllRestaurants();
+    String retrieveAllRestaurants() throws MalformedURLException;
 
     String retrieveRestaurants(String restaurantName) throws MalformedURLException;
 

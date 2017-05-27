@@ -22,10 +22,19 @@ public class YelpFusionApiController extends GenericRestController {
         this.yelpServiceImplementation = yelpServiceImplementation;
     }
 
-    @RequestMapping(value = "/yelp/search/", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/yelp/search/{name}", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody
-    String searchForRestaurant(@RequestParam("name") String name) throws MalformedURLException {
+    String searchForRestaurant(@PathVariable("name") String name) throws MalformedURLException {
         return yelpServiceImplementation.retrieveRestaurants(name);
     }
+
+    @RequestMapping(value = "/yelp/search/", method = RequestMethod.GET, produces = "application/json")
+    public @ResponseBody
+    String searchForAllRestaurants() throws MalformedURLException {
+        return yelpServiceImplementation.retrieveAllRestaurants();
+    }
+
+
+
 
 }
