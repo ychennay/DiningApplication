@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 
 @Controller
-public class MainController {
+public class PrimaryController {
 
     @RequestMapping(value = "/help", method = RequestMethod.GET)
     public String help(){

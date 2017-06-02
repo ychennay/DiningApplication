@@ -3,21 +3,20 @@ package main.java;
 import main.java.config.PropertyConfiguration;
 import org.apache.log4j.Logger;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
+import org.springframework.cloud.config.server.EnableConfigServer;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
 /**
  * Created by ychen4 on 5/4/2017.
  */
-//@SpringBootApplication
-@Configuration
-@ComponentScan
-@EnableAutoConfiguration
+
+@SpringBootApplication
+@EnableConfigServer
 public class App extends SpringBootServletInitializer{
 
  private static final Logger logger = Logger.getLogger(App.class.toString());
