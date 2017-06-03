@@ -16,7 +16,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  */
 
 @SpringBootApplication
-@EnableConfigServer
+@EnableEurekaServer
 public class App extends SpringBootServletInitializer{
 
  private static final Logger logger = Logger.getLogger(App.class.toString());

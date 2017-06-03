@@ -5,4 +5,7 @@
 /.idea/*
 /target/
 /Dining.iml
-/resources/database.properties
+src/main/java/batch/listeners/
+src/main/java/batch/readers/
+src/main/java/batch/tasklet/
+src/main/java/batch/writers/
