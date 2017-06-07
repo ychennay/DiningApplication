@@ -35,14 +35,15 @@ public class ClientDiscoveryController {
         List<ServiceInstance> list = client.getInstances(service);
         if (list != null && list.size() > 0){
             URI uri = list.get(0).getUri();
+            System.out.println(uri);
             if (uri != null){
-//              String stringUri = new StringBuilder().append(uri.toString()).append("/ws-account/api").toString();
-//                try {
-//                    uri = new URI(stringUri);
-//                } catch (URISyntaxException e) {
-//                    e.printStackTrace();
-//                }
-//                System.out.println(uri);
+              String stringUri = new StringBuilder().append(uri.toString()).append("/ws-account/api").toString();
+                try {
+                    uri = new URI(stringUri);
+                } catch (URISyntaxException e) {
+                    e.printStackTrace();
+                }
+                System.out.println(uri);
                 return (new RestTemplate()).getForObject(uri, String.class);
             }
         }
