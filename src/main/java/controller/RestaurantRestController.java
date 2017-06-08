@@ -1,21 +1,32 @@
 package main.java.controller;
 
+import main.java.implementations.RestaurantServiceImplementation;
 import main.java.implementations.YelpServiceImplementation;
 import main.java.model.Restaurant;
-import main.java.implementations.RestaurantServiceImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 
-import javax.ws.rs.Path;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
-import java.net.MalformedURLException;
+import java.io.StringReader;
 import java.net.URI;
-import java.net.URISyntaxException;
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+
+import static org.joox.JOOX.$;
 
 /**
  * Created by ychen4 on 4/30/2017.
@@ -38,12 +49,19 @@ public class RestaurantRestController extends GenericRestController{
         this.yelpService = yelpService;
     }
 
+    /**
+     *
+     * @param restaurantId
+     * @param userId
+     * @param token
+     * @return Restaurant info that contains user info as well
+     */
     @RequestMapping("/restaurant/{restaurantId}/user/{userId}")
     public Restaurant getRestaurantById(@PathVariable("restaurantId") String restaurantId,
                                         @PathVariable("userId") String userId,
-                                        @RequestHeader("X-Auth-Token") String token) throws Exception {
+                                        @RequestHeader("X-Auth-Token") String token)
+            throws ParserConfigurationException, IOException, SAXException {
 
-        System.out.println("TOKEN: " + token);
         Restaurant restaurant = restaurantService.getRestaurantById(restaurantId);
 
         List<ServiceInstance> serviceList = client.getInstances(accountService);
@@ -52,13 +70,11 @@ public class RestaurantRestController extends GenericRestController{
             if (uri != null) {
                 // url for making request to Account service
                 String baseUrl = uri.toString() + accountServicePath;
-                System.out.println("BASE: " + baseUrl);
                 String userRatingUrl = baseUrl + "/rating-restaurant/uid/" + userId + "/rid/" + restaurantId;
-                System.out.println("RATING: " + userRatingUrl);
                 String userBookmarkUrl = baseUrl + "/bookmark-restaurant/uid/" + userId +"/rid/" + restaurantId;
-                System.out.println("BOOKMARK: " + userBookmarkUrl);
                 String userCommentUrl = baseUrl + "/comment-restaurant/uid/" + userId + "/rid/" + restaurantId;
-                System.out.println("COMMENT: " + userCommentUrl);
+                String averageRatingUrl = baseUrl + "/rating-restaurant/rid/" + restaurantId;
+                String allCommentsUrl = baseUrl + "/comment-restaurant/rid/" + restaurantId;
 
                 HttpHeaders headers = new HttpHeaders();
                 headers.set("X-Auth-Token", token);
@@ -68,8 +84,13 @@ public class RestaurantRestController extends GenericRestController{
                 ResponseEntity<String> responseUserRating = new RestTemplate()
                         .exchange(userRatingUrl, HttpMethod.GET, entity, String.class);
                 String userRatingResponse = responseUserRating.getBody();
-                restaurant.setUserRating(userRatingResponse);
-                System.out.println(userRatingResponse);
+                if (userRatingResponse == null) {
+                    restaurant.setUserRating("");
+                }
+                else {
+                    String rating = $(userRatingResponse).find("rating").text();
+                    restaurant.setUserRating(rating);
+                }
 
                 ResponseEntity<String> responseUserBookmark = new RestTemplate()
                         .exchange(userBookmarkUrl, HttpMethod.GET, entity, String.class);
@@ -80,18 +101,73 @@ public class RestaurantRestController extends GenericRestController{
                 else {
                     restaurant.setUserBookmark("true");
                 }
-                System.out.println(userBookmarkResponse);
 
                 ResponseEntity<String> responseUserComment = new RestTemplate()
                         .exchange(userCommentUrl, HttpMethod.GET, entity, String.class);
                 String userCommentResponse = responseUserComment.getBody();
-                restaurant.setUserComment(userCommentResponse);
-                System.out.println(userCommentResponse);
+                if (userCommentResponse == null) {
+                    restaurant.setUserComment("");
+                }
+                else {
+                    String comment = $(userCommentResponse).find("comment").text();
+                    restaurant.setUserComment(comment);
+                }
 
-//                restaurant = restaurantService.updateRestaurantById(restaurantId, restaurant);
+                ResponseEntity<String> responseAverageRating = new RestTemplate()
+                        .exchange(averageRatingUrl, HttpMethod.GET, entity, String.class);
+                String averageRatingResponse = responseAverageRating.getBody();
+                if (averageRatingResponse == null) {
+                    restaurant.setAverageRating("");
+                }
+                else {
+                    String averageRating = $(averageRatingResponse).find("rating").text();
+                    restaurant.setAverageRating(averageRating);
+                }
+
+                ResponseEntity<String> responseAllComments = new RestTemplate()
+                        .exchange(allCommentsUrl, HttpMethod.GET, entity, String.class);
+                String allCommentsResponse = responseAllComments.getBody();
+                if (allCommentsResponse == null) {
+                    restaurant.setAllComments(null);
+                }
+                else {
+                    List<Map<String, String>> listMapAllComments = new LinkedList<>();
+
+                    DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+                    DocumentBuilder builder = factory.newDocumentBuilder();
+                    InputSource is = new InputSource(new StringReader(allCommentsResponse));
+                    Document doc = builder.parse(is);
+
+                    NodeList commentList = doc.getElementsByTagName("item");
+                    for (int i = 0; i < commentList.getLength(); ++i)
+                    {
+                        Map<String, String> mapComment = new HashMap<>();
+
+                        Element element = (Element) commentList.item(i);
+
+                        // Do not return user's comment in the list of comments since already in Restaurant object
+                        NodeList userIdList = element.getElementsByTagName("userId");
+                        Element userIdElement = (Element) userIdList.item(0);
+                        String userIdFromList = userIdElement.getFirstChild().getNodeValue();
+
+                        if (!userIdFromList.equals(userId)) {
+                            NodeList userNameList = element.getElementsByTagName("userName");
+                            Element userNameElement = (Element) userNameList.item(0);
+                            String userName = userNameElement.getFirstChild().getNodeValue();
+                            mapComment.put("userName", userName);
+
+                            NodeList userCommentList = element.getElementsByTagName("comment");
+                            Element userCommentElement = (Element) userCommentList.item(0);
+                            String comment = userCommentElement.getFirstChild().getNodeValue();
+                            mapComment.put("comment", comment);
+
+                            listMapAllComments.add(mapComment);
+                        }
+                    }
+                    restaurant.setAllComments(listMapAllComments);
+                }
             }
         }
-
         return restaurant;
     }
 

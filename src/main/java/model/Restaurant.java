@@ -1,9 +1,9 @@
 package main.java.model;
 
-import com.amazonaws.services.dynamodbv2.datamodeling.*;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 
-import javax.persistence.*;
-import java.util.Date;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -39,11 +39,11 @@ public class Restaurant {
     private String snippetText;
     private String stateCode;
     private String url;
-    private String userRating = "";
-    private String userBookmark = "";
-    private String userComment = "";
-    private String allComments = "";
-    private String averageRating = "";
+    private String userRating;
+    private String userBookmark;
+    private String userComment;
+    private List<Map<String, String>> allComments;
+    private String averageRating;
 
     public Restaurant(String restaurantId) {
         this.restaurantId = restaurantId;
@@ -257,25 +257,55 @@ public class Restaurant {
         this.reviewCount = reviewCount;
     }
 
+    public String getUserRating() {
+        return userRating;
+    }
+
     public void setUserRating(String userRating) {
         this.userRating = userRating;
+    }
+
+    public String getUserBookmark() {
+        return userBookmark;
     }
 
     public void setUserBookmark(String userBookmark) {
         this.userBookmark = userBookmark;
     }
 
+    public String getUserComment() {
+        return userComment;
+    }
+
     public void setUserComment(String userComment) {
         this.userComment = userComment;
     }
 
-    public void setAllComments(String allComments) {
+    public List<Map<String, String>> getAllComments() {
+        return allComments;
+    }
+
+    public void setAllComments(List<Map<String, String>> allComments) {
         this.allComments = allComments;
     }
 
-    public void  setAverageRating(String averageRating) {
+    public String getAverageRating() {
+        return averageRating;
+    }
+
+    public void setAverageRating(String averageRating) {
         this.averageRating = averageRating;
     }
+
+//    public void setAllComments(String allComments) {
+//        this.allComments = allComments;
+//    }
+//
+//    public void  setAverageRating(String averageRating) {
+//        this.averageRating = averageRating;
+//    }
+
+
 
 //    @DynamoDBHashKey(attributeName = "Id")
 //    public int getId() {
