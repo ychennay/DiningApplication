@@ -27,7 +27,7 @@ public class ClientDiscoveryController {
 
     @RequestMapping("/sentence")
     public @ResponseBody String getSentence(){
-        return getWord("LAB-4-SUBJECT");
+        return getWord("ACCOUNT");
     }
 
 

@@ -2,6 +2,7 @@ package main.java.dao;
 
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.auth.profile.ProfileCredentialsProvider;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
@@ -70,14 +71,25 @@ public class DynamoClientMapper {
 
 
 
+//    private void initAWSCreds() {
+//        /* Hard coding AWS credentials until we figure out how to get values from properties */
+//        BasicAWSCredentials awsCreds = new BasicAWSCredentials(accessKeyId, secretKeyId);
+//
+//        client = AmazonDynamoDBClientBuilder.standard()
+////                .withEndpointConfiguration(new EndpointConfiguration(endpoint, region)) // For now EndpointConfiguration does not work
+//                .withRegion(Regions.US_WEST_2)
+//                .withCredentials(new AWSStaticCredentialsProvider(awsCreds))
+//                .build();
+//
+//        this.dynamoDB = new DynamoDB(client);
+//    }
+
     private void initAWSCreds() {
         /* Hard coding AWS credentials until we figure out how to get values from properties */
-        BasicAWSCredentials awsCreds = new BasicAWSCredentials(accessKeyId, secretKeyId);
-
         client = AmazonDynamoDBClientBuilder.standard()
 //                .withEndpointConfiguration(new EndpointConfiguration(endpoint, region)) // For now EndpointConfiguration does not work
                 .withRegion(Regions.US_WEST_2)
-                .withCredentials(new AWSStaticCredentialsProvider(awsCreds))
+                .withCredentials(new ProfileCredentialsProvider())
                 .build();
 
         this.dynamoDB = new DynamoDB(client);

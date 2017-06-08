@@ -85,11 +85,4 @@ public class RestaurantServiceImplementation implements RestaurantService {
 
         return restaurantList;
     }
-
-    @Override
-    public Restaurant updateRestaurantById(String restaurantId) {
-        return null;
-    }
-
-
 }

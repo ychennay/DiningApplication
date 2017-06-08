@@ -12,6 +12,4 @@ public interface RestaurantService {
 
     List<Restaurant> randomFiveRestaurants(String city, String label);
 
-    Restaurant updateRestaurantById(String restaurantId);
-
 }
