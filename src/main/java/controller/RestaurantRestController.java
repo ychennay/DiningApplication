@@ -53,13 +53,11 @@ public class RestaurantRestController extends GenericRestController{
      * method returns a restaurant object using path variables
      * @param restaurantId the ID of the restaurant to query
      * @param userId the ID of the user
-     * @param token the string authentication access token used for security/validation
      * @return Restaurant info that contains user info as well
      */
     @RequestMapping("/restaurant/{restaurantId}/user/{userId}")
     public Restaurant getRestaurantById(@PathVariable("restaurantId") String restaurantId,
-                                        @PathVariable("userId") String userId,
-                                        @RequestHeader("X-Auth-Token") String token)
+                                        @PathVariable("userId") String userId)
             throws ParserConfigurationException, IOException, SAXException {
 
         Restaurant restaurant = restaurantService.getRestaurantById(restaurantId);
@@ -77,7 +75,6 @@ public class RestaurantRestController extends GenericRestController{
                 String allCommentsUrl = baseUrl + "/comment-restaurant/rid/" + restaurantId;
 
                 HttpHeaders headers = new HttpHeaders();
-                headers.set("X-Auth-Token", token);
 
                 HttpEntity entity = new HttpEntity(headers);
 

@@ -31,8 +31,29 @@ import java.util.List;
 /**
  * Created by CrazyAzianFool on 6/8/17.
  */
+//@Controller
+//public class RegisterController {
+//
+//    @RequestMapping(value = "/register", method = RequestMethod.GET)
+//    public String load_register(){
+//        System.out.println("GET called on the registration page");
+//        return "registration";
+//    }
+//
+//}
+
 @Controller
 public class RegisterController {
+
+    /**
+     * this is the controller for the registration page
+     * The endpoint is specified at /registration
+     * when a GET message is used respond with a system print and return the registration.html
+     *
+     * when a POST message is used (by users entering their information) pull this information to create a new user (in progress)
+     *
+     * @return
+     */
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String load_register(){
@@ -40,5 +61,10 @@ public class RegisterController {
         return "registration";
     }
 
-}
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public String post_register(){
+        System.out.println("POST called on the registration page");
+        return "registration";
+    }
 
+}
