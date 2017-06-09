@@ -49,7 +49,7 @@ public class ReviewRestControllerTest {
     @Test
     public void testControllers() throws Exception {
         ResultMatcher ok = MockMvcResultMatchers.status().isOk();
-        MockHttpServletRequestBuilder builder = MockMvcRequestBuilders.get("/sentence");
+        MockHttpServletRequestBuilder builder = MockMvcRequestBuilders.get("/api/reviews");
 
         this.mockMvc.perform(builder)
                 .andExpect(ok);
