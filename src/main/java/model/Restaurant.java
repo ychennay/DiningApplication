@@ -45,6 +45,45 @@ public class Restaurant {
     private List<Map<String, String>> allComments;
     private String averageRating;
 
+    @Override
+    public String toString() {
+        return "Restaurant{" +
+                "restaurantId='" + restaurantId + '\'' +
+                ", address=" + address +
+                ", city='" + city + '\'' +
+                ", countryCode='" + countryCode + '\'' +
+                ", displayAddress=" + displayAddress +
+                ", displayPhone='" + displayPhone + '\'' +
+                ", geoAccuracy=" + geoAccuracy +
+                ", id='" + id + '\'' +
+                ", imageUrl='" + imageUrl + '\'' +
+                ", isClaimed='" + isClaimed + '\'' +
+                ", isClosed='" + isClosed + '\'' +
+                ", latitude=" + latitude +
+                ", longitude=" + longitude +
+                ", mobileUrl='" + mobileUrl + '\'' +
+                ", name='" + name + '\'' +
+                ", phone='" + phone + '\'' +
+                ", postalCode='" + postalCode + '\'' +
+                ", rating=" + rating +
+                ", ratingImgUrl='" + ratingImgUrl + '\'' +
+                ", ratingImgUrlLarge='" + ratingImgUrlLarge + '\'' +
+                ", ratingImgUrlSmall='" + ratingImgUrlSmall + '\'' +
+                ", reviewCount=" + reviewCount +
+                ", snippetImgUrl='" + snippetImgUrl + '\'' +
+                ", snippetText='" + snippetText + '\'' +
+                ", stateCode='" + stateCode + '\'' +
+                ", url='" + url + '\'' +
+                ", userRating='" + userRating + '\'' +
+                ", userBookmark='" + userBookmark + '\'' +
+                ", userComment='" + userComment + '\'' +
+                ", allComments=" + allComments +
+                ", averageRating='" + averageRating + '\'' +
+                '}';
+    }
+
+    public Restaurant(){}
+
     public Restaurant(String restaurantId) {
         this.restaurantId = restaurantId;
     }

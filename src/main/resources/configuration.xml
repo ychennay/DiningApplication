@@ -1,22 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context-4.0.xsd
+http://www.springframework.org/schema/mvc
+http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
 
-    <context:property-placeholder location="file:C:\Users\Leon\IdeaProjects\DiningApplication\src\main\resources\database.properties"/>
 
-    <bean id="propertyConfiguration" class="main.java.config.PropertyConfiguration">
-        <property name="endpoint" value="${amazon.dynamodb.endpoint}"/>
-        <property name="accessKey" value="${amazon.accesskey}"/>
-        <property name="region" value="${amazon.dynamodb.region}"/>
-        <property name="secretKey" value="${amazon.secretkey}"/>
-        <property name="yelpEndpoint" value="${yelp.fusion.endpoint}"/>
-        <property name="yelpClientId" value="${yelp.fusion.clientID}"/>
-        <property name="yelpClientSecret" value="${yelp.fusion.clientSecret}"/>
-        <property name="accessTokenEndpoint" value="${yelp.fusion.accessTokenEndpoint}"/>
-        <property name="yelpGrantType" value="${yelp.fusion.grantType}"/>
-        <property name="yelpAccessToken" value="${yelp.fusion.accessToken}"/>
-        <property name="restaurantSearchEndpoint" value="${yelp.fusion.restaurantSearchEndpoint}"/>
-    </bean>
+<context:property-placeholder location="file:C:\Users\ychen4\IdeaProjects\DiningApplication\src\main\resources\database.properties"/>
+
+<bean id="propertyConfiguration" class="main.java.config.PropertyConfiguration">
+    <property name="endpoint" value="${amazon.dynamodb.endpoint}"/>
+    <property name="accessKey" value="${amazon.accesskey}"/>
+    <property name="region" value="${amazon.dynamodb.region}"/>
+    <property name="secretKey" value="${amazon.secretkey}"/>
+    <property name="yelpEndpoint" value="${yelp.fusion.endpoint}"/>
+    <property name="yelpClientId" value="${yelp.fusion.clientID}"/>
+    <property name="yelpClientSecret" value="${yelp.fusion.clientSecret}"/>
+    <property name="accessTokenEndpoint" value="${yelp.fusion.accessTokenEndpoint}"/>
+    <property name="yelpGrantType" value="${yelp.fusion.grantType}"/>
+    <property name="yelpAccessToken" value="${yelp.fusion.accessToken}"/>
+    <property name="restaurantSearchEndpoint" value="${yelp.fusion.restaurantSearchEndpoint}"/>
+    <property name="maxYelpUpdate" value="${yelp.fusion.maxUpdate}"/>
+</bean>
+
+
+<bean id="transactionManager" class="org.springframework.batch.support.transaction.ResourcelessTransactionManager"/>
+
+<bean id="jobLauncher" class="org.springframework.batch.core.launch.support.SimpleJobLauncher">
+    <property name="jobRepository" ref="jobRepository"/>
+</bean>
+
+<bean id="jobRepository" class="org.springframework.batch.core.repository.support.MapJobRepositoryFactoryBean">
+    <property name="transactionManager" ref="transactionManager"/>
+</bean>
+
+<bean id="simpleJob" class="org.springframework.batch.core.job.SimpleJob" abstract="true">
+    <property name="jobRepository" ref="jobRepository" />
+</bean>
+
 </beans>

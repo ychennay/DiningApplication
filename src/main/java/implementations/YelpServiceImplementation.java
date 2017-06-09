@@ -53,14 +53,11 @@ public class YelpServiceImplementation implements YelpService {
             HttpURLConnection connection = RequestResponseUtility.prepareGetRequest(url);
             JSONObject jsonObject = RequestResponseUtility.convertStreamToJson(connection.getInputStream());
             return RequestResponseUtility.prettyPrintJson(jsonObject);
-
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         return null;
     }
-
     public JSONObject retrieveAllRestaurantsJson() throws MalformedURLException {
         String baseUrl = properties.getRestaurantSearchEndpoint();
         baseUrl += "?latitude=" + Constants.LOS_ANGELES_LATITUDE;
