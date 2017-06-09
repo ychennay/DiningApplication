@@ -10,8 +10,9 @@ import org.springframework.stereotype.Component;
 
 /**
  * Created by ychen4 on 5/4/2017.
+ * This class contains a variety of properties that can be configured within the database.properties or
+ * application.properties. The class itself is a singleton bean that is instantiated in configuration.xml file.
  */
-
 public class PropertyConfiguration {
 
     private String endpoint;

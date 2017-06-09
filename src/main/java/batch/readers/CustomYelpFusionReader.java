@@ -50,8 +50,17 @@ public class CustomYelpFusionReader implements ItemReader<Restaurant> {
     private boolean restaurantDataNotInitialized(){
         return this.restaurantData == null;
     }
-    
 
+    /**
+     * This method will fetch restaurant data in the form of JSON from tho appropriate Yelp Fusion API endpoint. This
+     * method will then map the response to Restaurant objects. In the future, the logic for mapping of JSON objects
+     * should be abstracted into an individual mapper class. For now, it is still embedded within this custom reader.
+     * @return An ArrayList of Restaurant objects that have been mapped from the JSON response of the Yelp Fusion API.
+     * Currently, the max capacity of the JSON response is set by the attribute maxCapacity, which can be configured in
+     * the configuration.properties settings
+     * @throws MalformedURLException
+     * @throws JSONException
+     */
     public List<Restaurant> fetchRestaurantDataFromAPI() throws MalformedURLException, JSONException {
         List<Restaurant> restaurantList = new ArrayList<>();
         JSONObject restaurantJson = yelpServiceImplementation.retrieveAllRestaurantsJson();
