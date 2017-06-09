@@ -14,8 +14,16 @@
         <aws-sdk-java-version>1.11.138</aws-sdk-java-version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding> <!-- For UTF-8 support -->
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding> <!-- For UTF-8 support -->
+        <java.version>1.8</java.version> <!--testing for security-->
     </properties>
 
+    <!--parent of the security test-->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.5.3.RELEASE</version>
+    </parent>
+    end parent of security test
 
     <build>
         <sourceDirectory>src</sourceDirectory>
@@ -92,6 +100,22 @@
             <artifactId>spring-boot-starter-web</artifactId>
             <version>${spring-boot-version}</version>
         </dependency>
+
+    <!--thymeleaf template for html-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+            <version>${spring-boot-version}</version>
+        </dependency>
+
+
+        <!--dependecy for testing security-->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
         <dependency>
             <groupId>com.amazonaws</groupId>
             <artifactId>aws-java-sdk-dynamodb</artifactId>
@@ -200,6 +224,7 @@
             <artifactId>jackson-databind</artifactId>
             <version>${jackson.version}</version>
         </dependency>
+
         <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
         <dependency>
             <groupId>mysql</groupId>

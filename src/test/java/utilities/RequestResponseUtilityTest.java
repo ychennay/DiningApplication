@@ -4,6 +4,7 @@ import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import main.java.implementations.YelpServiceImplementation;
 import main.java.utilities.RequestResponseUtility;
 import oracle.jrockit.jfr.events.RequestableEventEnvironment;
+import org.json.JSONObject;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
@@ -39,7 +40,8 @@ public class RequestResponseUtilityTest extends AbstractTest {
     @Test(expected = IOException.class)
     public void convertStreamToStringNullTest() throws IOException {
 
-        RequestResponseUtility.convertStreamToString(inputStream);
+        String result = RequestResponseUtility.convertStreamToString(inputStream);
+        Assert.assertFalse(result.isEmpty());
     }
 
     @Test(expected = IOException.class)

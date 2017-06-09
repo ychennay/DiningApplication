@@ -1,20 +1,25 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<html lang="en">
 <head>
-    <title>Dining Connoisseur: Log In  </title>
+    <title>Dining Connoisseurd Backend</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
 </head>
 <body>
-<div th:if="${param.error}">
-    Invalid username and password.
-</div>
-<div th:if="${param.logout}">
-    You have been logged out.
-</div>
-<form th:action="@{/login}" method="post">
-    <div><label> User Name : <input type="text" name="username"/> </label></div>
-    <div><label> Password: <input type="password" name="password"/> </label></div>
-    <div><input type="submit" value="Sign In"/></div>
-</form>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">Dining Connoisseur RESTful API Endpoints</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li><a href="/">Home</a></li>
+            <li><a href="/restaurant">Restaurants</a></li>
+            <li><a href="/review">Reviews</a></li>
+            <li><a href="/user">Users</a></li>
+            <li><a href="/help">Help</a></li>
+            <li class="active"><a href="/login">Login</a></li>
+        </ul>
+    </div>
+</nav>
+Login in now!
 </body>
 </html>

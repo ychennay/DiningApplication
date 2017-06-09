@@ -50,6 +50,11 @@ public class YelpServiceImplementationTest extends AbstractTest {
         Assert.assertFalse(result.isEmpty());
     }
 
+    @Test
+    public void retrieveAllRestaurantsTest() throws MalformedURLException {
+        String result = yelpServiceImplementation.retrieveAllRestaurants();
+        Assert.assertFalse(result.isEmpty());
+    }
 
 
     @After
