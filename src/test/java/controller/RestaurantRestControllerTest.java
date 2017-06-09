@@ -28,6 +28,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 /**
  * Created by Leon on 6/8/2017.
+ * This test class checks the Restaurant controller to make sure it recognizes its respective get requests
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
@@ -39,6 +40,9 @@ public class RestaurantRestControllerTest {
     private WebApplicationContext wac;
     private MockMvc mockMvc;
 
+    /**
+     * This class sets up the configuration for unit testing the Restaurant controller
+     */
     @Configuration
     @EnableAutoConfiguration
     public static class Config{
@@ -55,6 +59,9 @@ public class RestaurantRestControllerTest {
     //private RestaurantServiceImplementation restaurantServiceImplementation;
     //private YelpServiceImplementation yelpServiceImplementation;
 
+    /**
+     * This function sets up the context for mockito and configures it as a web context
+     */
     @Before
     public void setup() {
 

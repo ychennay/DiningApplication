@@ -23,6 +23,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 /**
  * Created by Leon on 6/9/2017.
+ * This test class checks the Yelp Fusion controller to make sure it recognizes its respective get requests
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
@@ -33,6 +34,9 @@ public class YelpFusionApiControllerTest {
     private WebApplicationContext wac;
     private MockMvc mockMvc;
 
+    /**
+     * This class sets up the configuration for unit testing the Yelp Fusion controller
+     */
     @Configuration
     @EnableAutoConfiguration
     public static class Config{
@@ -42,12 +46,19 @@ public class YelpFusionApiControllerTest {
         }
     }
 
+    /**
+     * This function sets up the context for mockito and configures it as a web context
+     */
     @Before
     public void setup() {
 
         this.mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
     }
 
+    /**
+     * This test checks the get request for getting all restaurants
+     * @throws Exception
+     */
     @Test
     public void getAllRestaurantsTest() throws Exception {
         ResultMatcher ok = MockMvcResultMatchers.status().isNotFound();
@@ -57,6 +68,10 @@ public class YelpFusionApiControllerTest {
                 .andExpect(ok);
     }
 
+    /**
+     * This test checks the get request for getting one specific restaurant
+     * @throws Exception
+     */
     @Test
     public void getOneRestaurantsTest() throws Exception {
         ResultMatcher ok = MockMvcResultMatchers.status().isNotFound();

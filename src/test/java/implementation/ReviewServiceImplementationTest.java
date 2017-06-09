@@ -15,6 +15,7 @@ import java.util.List;
 
 /**
  * Created by Leon on 6/8/2017.
+ * This test class checks the implementation functions of Review Service
  */
 @SpringBootTest(classes = ReviewServiceImplementation.class)
 public class ReviewServiceImplementationTest extends AbstractTest {
@@ -24,18 +25,27 @@ public class ReviewServiceImplementationTest extends AbstractTest {
 
     public PropertyConfiguration propertyConfiguration;
 
+    /**
+     * This function sets up context by invoking before() implemented in AbstractTest
+     */
     @Before
     public void before(){
         super.before();
         propertyConfiguration = super.propertyConfiguration;
     }
 
+    /**
+     * This test function tests the implementation for getting a single review by its ID
+     */
     @Test
     public void getReviewByIDTest() {
         Review result = reviewServiceImplementation.getReviewById(1);
         Assert.assertTrue(result.getReviewText() == "This restaurant was terrific!");
     }
 
+    /**
+     * This test function tests the implementation for getting all reviews
+     */
     @Test
     public void listAllReviewsTest(){
         List<Review> result = reviewServiceImplementation.listAllReviews();
