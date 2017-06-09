@@ -25,7 +25,15 @@ public class PropertyConfiguration {
     private String yelpAccessToken;
     private String yelpGrantType;
     private String restaurantSearchEndpoint;
+    private int maxYelpUpdate;
 
+    public int getMaxYelpUpdate() {
+        return maxYelpUpdate;
+    }
+
+    public void setMaxYelpUpdate(int maxYelpUpdate) {
+        this.maxYelpUpdate = maxYelpUpdate;
+    }
 
     public String getYelpGrantType() {
         return yelpGrantType;
