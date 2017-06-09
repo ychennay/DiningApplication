@@ -8,22 +8,25 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 
-//@Configuration
-//@EnableWebSecurity
+@Configuration
+@EnableWebSecurity
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception{
-        http.authorizeRequests()
-                .antMatchers("/","/home").permitAll()
-                .anyRequest().authenticated()
-                .and()
+        http
+                .authorizeRequests()
+                //.antMatchers("/","/home","/api/reviews").permitAll()
+                  .antMatchers("/","/home", "/register").permitAll()
+                //  .antMatchers("/yelp", "/api", "/yelp/search", "/api/search").hasRole("USER")
+                    .anyRequest().authenticated()
+                    .and()
                 .formLogin()
-                .loginPage("/login")
-                .permitAll()
-                .and()
+                    .loginPage("/login")
+                    .permitAll()
+                    .and()
                 .logout()
-                .permitAll();
+                    .permitAll();
     }
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{
