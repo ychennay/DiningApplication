@@ -187,5 +187,4 @@ public class RestaurantRestController extends GenericRestController{
         return yelpService.generateAccessToken();
     }
 
-
 }
