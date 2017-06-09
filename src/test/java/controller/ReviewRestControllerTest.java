@@ -7,8 +7,11 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -35,15 +38,27 @@ public class ReviewRestControllerTest {
     private WebApplicationContext wac;
     private MockMvc mockMvc;
 
-    private ReviewServiceImplementation reviewServiceImplementation;
+    @Configuration
+    @EnableAutoConfiguration
+    public static class Config{
+        ReviewServiceImplementation reviewServiceImplementation = new ReviewServiceImplementation();
+        @Bean
+        public ReviewRestController reviewRestController(){
+            return new ReviewRestController(reviewServiceImplementation);
+        }
+    }
+
+
 
 
 
     @Before
     public void setup() {
+//        ReviewServiceImplementation reviewServiceImplementation = new ReviewServiceImplementation();
+//        StandaloneMockMvcBuilder builder = MockMvcBuilders.standaloneSetup(new ReviewRestController(reviewServiceImplementation));
+//        this.mockMvc = builder.build();
 
-        StandaloneMockMvcBuilder builder = MockMvcBuilders.standaloneSetup(new ReviewRestController(reviewServiceImplementation));
-        this.mockMvc = builder.build();
+        this.mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
     }
 
     @Test
