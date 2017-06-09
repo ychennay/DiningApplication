@@ -68,9 +68,33 @@ public class ReviewRestControllerTest {
     }
 
     @Test
-    public void getApiReviewIDTest() throws Exception {
+    public void getApiReviewID1Test() throws Exception {
         ResultMatcher ok = MockMvcResultMatchers.status().isOk();
         MockHttpServletRequestBuilder builder = MockMvcRequestBuilders.get("/api/reviews/1");
+
+        this.mockMvc.perform(builder)
+                .andExpect(ok);
+    }
+    @Test
+    public void getApiReviewID2Test() throws Exception {
+        ResultMatcher ok = MockMvcResultMatchers.status().isOk();
+        MockHttpServletRequestBuilder builder = MockMvcRequestBuilders.get("/api/reviews/2");
+
+        this.mockMvc.perform(builder)
+                .andExpect(ok);
+    }
+    @Test
+    public void getApiReviewID3Test() throws Exception {
+        ResultMatcher ok = MockMvcResultMatchers.status().isOk();
+        MockHttpServletRequestBuilder builder = MockMvcRequestBuilders.get("/api/reviews/3");
+
+        this.mockMvc.perform(builder)
+                .andExpect(ok);
+    }
+    @Test
+    public void getApiReviewID4Test() throws Exception {
+        ResultMatcher ok = MockMvcResultMatchers.status().isOk();
+        MockHttpServletRequestBuilder builder = MockMvcRequestBuilders.get("/api/reviews/4");
 
         this.mockMvc.perform(builder)
                 .andExpect(ok);

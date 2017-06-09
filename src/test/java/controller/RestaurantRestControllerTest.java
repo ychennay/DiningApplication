@@ -64,9 +64,33 @@ public class RestaurantRestControllerTest {
     }
 
     @Test
-    public void getRestaurantUserTest() throws Exception {
+    public void getRestaurantUser1Test() throws Exception {
         ResultMatcher ok = MockMvcResultMatchers.status().isNotFound();  //SHOULD BE FOUND CHANGE THIS WHEN FIGURE OUT HOW TO MOCK DYNAMODB
         MockHttpServletRequestBuilder builder = MockMvcRequestBuilders.get("/restaurant/Tsujita/user/1");
+
+        this.mockMvc.perform(builder)
+                .andExpect(ok);
+    }
+    @Test
+    public void getRestaurantUser2Test() throws Exception {
+        ResultMatcher ok = MockMvcResultMatchers.status().isNotFound();  //SHOULD BE FOUND CHANGE THIS WHEN FIGURE OUT HOW TO MOCK DYNAMODB
+        MockHttpServletRequestBuilder builder = MockMvcRequestBuilders.get("/restaurant/Tsujita/user/2");
+
+        this.mockMvc.perform(builder)
+                .andExpect(ok);
+    }
+    @Test
+    public void getRestaurantUser3Test() throws Exception {
+        ResultMatcher ok = MockMvcResultMatchers.status().isNotFound();  //SHOULD BE FOUND CHANGE THIS WHEN FIGURE OUT HOW TO MOCK DYNAMODB
+        MockHttpServletRequestBuilder builder = MockMvcRequestBuilders.get("/restaurant/Tsujita/user/3");
+
+        this.mockMvc.perform(builder)
+                .andExpect(ok);
+    }
+    @Test
+    public void getRestaurantUser4Test() throws Exception {
+        ResultMatcher ok = MockMvcResultMatchers.status().isNotFound();  //SHOULD BE FOUND CHANGE THIS WHEN FIGURE OUT HOW TO MOCK DYNAMODB
+        MockHttpServletRequestBuilder builder = MockMvcRequestBuilders.get("/restaurant/Tsujita/user/4");
 
         this.mockMvc.perform(builder)
                 .andExpect(ok);

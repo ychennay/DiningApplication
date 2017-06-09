@@ -49,12 +49,22 @@ public class YelpFusionApiControllerTest {
     }
 
     @Test
-    public void getApiReviewsTest() throws Exception {
+    public void getAllRestaurantsTest() throws Exception {
         ResultMatcher ok = MockMvcResultMatchers.status().isNotFound();
         MockHttpServletRequestBuilder builder = MockMvcRequestBuilders.get("/yelp/search/");
 
         this.mockMvc.perform(builder)
                 .andExpect(ok);
     }
+
+    @Test
+    public void getOneRestaurantsTest() throws Exception {
+        ResultMatcher ok = MockMvcResultMatchers.status().isNotFound();
+        MockHttpServletRequestBuilder builder = MockMvcRequestBuilders.get("/yelp/search/Tsujita");
+
+        this.mockMvc.perform(builder)
+                .andExpect(ok);
+    }
+
 
 }
