@@ -17,16 +17,6 @@ import java.util.*;
 @PropertySource(value = "database.properties", ignoreResourceNotFound = true)
 public class DynamoClientMapper {
 
-
-//    @Value("${amazon.aws.accesskey:'key1'}")
-//    private String amazonAWSAccessKey;
-//
-//    @Value("${amazon.aws.secretkey:'key2'}")
-//    private String amazonAWSSecretKey;
-//
-//    @Value("${amazon.aws.region:'us-west-1'}")
-//    private String amazonAWSRegion;
-
     private DynamoDB dynamoDB;
     private AmazonDynamoDB client;
 
