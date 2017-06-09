@@ -66,5 +66,4 @@ public class CustomYelpFusionReader implements ItemReader<Restaurant> {
             e.printStackTrace();
         }
     }
-
 }
