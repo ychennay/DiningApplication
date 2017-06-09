@@ -50,10 +50,10 @@ public class RestaurantRestController extends GenericRestController{
     }
 
     /**
-     *
-     * @param restaurantId
-     * @param userId
-     * @param token
+     * method returns a restaurant object using path variables
+     * @param restaurantId the ID of the restaurant to query
+     * @param userId the ID of the user
+     * @param token the string authentication access token used for security/validation
      * @return Restaurant info that contains user info as well
      */
     @RequestMapping("/restaurant/{restaurantId}/user/{userId}")
@@ -186,6 +186,5 @@ public class RestaurantRestController extends GenericRestController{
     public HttpStatus getAccessToken() throws IOException {
         return yelpService.generateAccessToken();
     }
-
 
 }

@@ -1,5 +1,8 @@
 package main.java.model;
 
+import javax.persistence.*;
+import java.util.Set;
+
 /**
  * Created by ychen4 on 5/5/2017.
  */
@@ -18,6 +21,13 @@ public class User {
 
     @DynamoDBAttribute(attributeName = "FirstName")
     private String firstName;
+
+    //add a password to be stored locally
+    private String password;
+
+    public String getPw() { return password; }
+
+    public void setPw() { this.password = password; }
 
     public String getId() {
         return id;

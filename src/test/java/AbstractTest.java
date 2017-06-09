@@ -14,6 +14,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 /**
  * Created by ychen4 on 5/26/2017.
+ * This test class is a super class that will be inherited by some of the child test classes. It will mainly be used to configure the contest
  */
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -23,6 +24,9 @@ public abstract class AbstractTest {
     protected Logger logger = Logger.getLogger(this.getClass().toString());
     public PropertyConfiguration propertyConfiguration;
 
+    /**
+     * This function will set up the configuration for the context and make sure the configuration file is found
+     */
     @Before
     public void before(){
         String configFile = "configuration.xml";
@@ -30,6 +34,5 @@ public abstract class AbstractTest {
                 new ClassPathXmlApplicationContext(configFile);
         propertyConfiguration = (PropertyConfiguration) context.getBean("propertyConfiguration");
     }
-
-
+    
 }

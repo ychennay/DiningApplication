@@ -32,7 +32,4 @@ public class BatchConfiguration {
         return new RestaurantItemProcessor();
     }
 
-
-
-
 }

@@ -1,0 +1,38 @@
+<html >
+<body>
+<h1 text="#{label.form.title}">Registration</h1>
+<form action="/" object="${user}" method="POST" enctype="utf8">
+    <div>
+        <label text="#{label.user.firstName}">first</label>
+        <input field="*{firstName}"/>
+        <p each="error: ${#fields.errors('firstName')}"
+           text="${error}">Validation error</p>
+    </div>
+    <div>
+        <label text="#{label.user.lastName}">last</label>
+        <input field="*{lastName}"/>
+        <p each="error : ${#fields.errors('lastName')}"
+           text="${error}">Validation error</p>
+    </div>
+    <div>
+        <label text="#{label.user.email}">email</label>
+        <input type="email" field="*{email}"/>
+        <p each="error : ${#fields.errors('email')}"
+           text="${error}">Validation error</p>
+    </div>
+    <div>
+        <label text="#{label.user.password}">password</label>
+        <input type="password" field="*{password}"/>
+        <p each="error : ${#fields.errors('password')}"
+           text="${error}">Validation error</p>
+    </div>
+    <div>
+        <label text="#{label.user.confirmPass}">confirm</label>
+        <input type="password" field="*{matchingPassword}"/>
+    </div>
+    <button type="submit" text="#{label.form.submit}">submit</button>
+</form>
+
+<a href="@{/login.html}" text="#{label.form.loginLink}">login</a>
+</body>
+</html>

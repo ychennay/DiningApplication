@@ -19,6 +19,7 @@ import java.net.MalformedURLException;
 
 /**
  * Created by ychen4 on 5/26/2017.
+ * This test class checks the implementation functions of Yelp Service
  */
 @SpringBootTest(classes = YelpServiceImplementation.class)
 public class YelpServiceImplementationTest extends AbstractTest {
@@ -28,13 +29,18 @@ public class YelpServiceImplementationTest extends AbstractTest {
 
     public PropertyConfiguration propertyConfiguration;
 
+    /**
+     * This function sets up context by invoking before() implemented in AbstractTest
+     */
     @Before
     public void before(){
         super.before();
         propertyConfiguration = super.propertyConfiguration;
     }
 
-
+    /**
+     * This test function will test the retrieval of Yelp Fusion Access token and makes sure it is 128 chars
+     */
     @Test
     public void retrieveAccessTokenTest(){
         String yelpAccessToken = propertyConfiguration.getYelpAccessToken();
@@ -43,13 +49,25 @@ public class YelpServiceImplementationTest extends AbstractTest {
         Assert.assertTrue(yelpAccessToken.length() == 128);
     }
 
-
+    /**
+     * This test function will test to make sure a call to retrieve a specific restaurant is successful and does not throw exceptions
+     * @throws MalformedURLException
+     */
     @Test
     public void retrieveRestaurantsTest() throws MalformedURLException {
         String result = yelpServiceImplementation.retrieveRestaurants("Tsujita");
         Assert.assertFalse(result.isEmpty());
     }
 
+    /**
+     * This test function will test to make sure a call to retrieve all restaurants is successful and does not throw exceptions
+     * @throws MalformedURLException
+     */
+    @Test
+    public void retrieveAllRestaurantsTest() throws MalformedURLException {
+        String result = yelpServiceImplementation.retrieveAllRestaurants();
+        Assert.assertFalse(result.isEmpty());
+    }
 
 
     @After

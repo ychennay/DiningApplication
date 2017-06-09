@@ -4,6 +4,7 @@ import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import main.java.implementations.YelpServiceImplementation;
 import main.java.utilities.RequestResponseUtility;
 import oracle.jrockit.jfr.events.RequestableEventEnvironment;
+import org.json.JSONObject;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
@@ -25,6 +26,7 @@ import java.rmi.server.ExportException;
 
 /**
  * Created by ychen4 on 5/26/2017.
+ * This test class will test the utility functions
  */
 @SpringBootTest(classes = RequestResponseUtility.class)
 public class RequestResponseUtilityTest extends AbstractTest {
@@ -36,12 +38,21 @@ public class RequestResponseUtilityTest extends AbstractTest {
 
     @Rule public ExpectedException thrown = ExpectedException.none();
 
+    /**
+     * This test function makes sure a call to convert a Stream to String does not throw IOExceptions
+     * @throws IOException
+     */
     @Test(expected = IOException.class)
     public void convertStreamToStringNullTest() throws IOException {
 
-        RequestResponseUtility.convertStreamToString(inputStream);
+        String result = RequestResponseUtility.convertStreamToString(inputStream);
+        Assert.assertFalse(result.isEmpty());
     }
 
+    /**
+     * This test function makes sure a call to convert a Stream to Json does not throw IOExceptions
+     * @throws IOException
+     */
     @Test(expected = IOException.class)
     public void convertStreamToJsonNullTest() throws IOException {
         RequestResponseUtility.convertStreamToJson(inputStream);
