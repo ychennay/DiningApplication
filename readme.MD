@@ -1,5 +1,4 @@
-## Citations
-Templates for starting design taken from this tutorial: http://viralpatel.net/blogs/spring-4-mvc-rest-example-json/
+
 
 ## Getting Started with Java Spring
 
