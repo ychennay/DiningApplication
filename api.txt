@@ -1,11 +1,8 @@
 1. Get Restaurant information with user information included
-curl -X GET http://localhost:8020/restaurant/{restaurantId}/user/{userId} \
--H "X-Auth-Token:<X-Auth-Token>"
+curl -X GET http://localhost:8020/restaurant/{restaurantId}/user/{userId}
 
 2. Get 5 random restaurants based on city name (in Los Angeles)
-curl -X GET http://localhost:8020/restaurant/city/{city} \
--H "X-Auth-Token:<X-Auth-Token>"
+curl -X GET http://localhost:8020/restaurant/city/{city}
 
 3. Get 5 random restaurants based on city name and label name (e.g. italian)
-curl -X GET http://localhost:8020/restaurant/city/{city}/label/{label} \
--H "X-Auth-Token:<X-Auth-Token>"
+curl -X GET http://localhost:8020/restaurant/city/{city}/label/{label}

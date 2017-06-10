@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Dining Connoisseur Home</title>
+
+    <div th:replace="fragments/header :: header-css"/>
+
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"/>
+
+<div class="container">
+
+    <div class="starter-template">
+        <h1>Endpoints</h1>
+        <h2>1. Visit <a th:href="@{/yelp/search/}">Yelp Search Results Page</a></h2>
+        <h2>2. Visit <a th:href="@{/api/reviews}">Reviews Page</a></h2>
+        <h2>3. Visit <a th:href="@{/help}">Help page</a></h2>
+    </div>
+
+</div>
+<!-- /.container -->
+
+<div th:replace="fragments/footer :: footer"/>
+
+</body>
+</html>

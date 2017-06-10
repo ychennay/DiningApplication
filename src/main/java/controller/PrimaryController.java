@@ -11,37 +11,84 @@ import org.springframework.web.bind.annotation.RestController;
  * Created by ychen4 on 5/4/2017.
  */
 
+//@Controller
+//public class PrimaryController {
+//
+//    @RequestMapping(value = "/help", method = RequestMethod.GET)
+//    public String help(){
+//        System.out.println("GET called on help page");
+//        return "help_page.html";
+//    }
+//
+//    @RequestMapping(value = "/", method = RequestMethod.GET)
+//    public String landing(){
+//        System.out.println("GET called on index page");
+//        return "landing.html";
+//    }
+//
+//    @RequestMapping(value = "/restaurant", method = RequestMethod.GET)
+//    public String restaurants(){
+//        System.out.println("GET called on restaurant page");
+//        return "restaurant_page.html";
+//    }
+//
+//    @RequestMapping(value = "/review", method = RequestMethod.GET)
+//    public String reviews(){
+//        System.out.println("GET called on restaurant page");
+//        return "review_page.html";
+//    }
+//
+//    @RequestMapping(value = "/user", method = RequestMethod.GET)
+//    public String users(){
+//        System.out.println("GET called on user page");
+//        return "user_page.html";
+//    }
+///*
+//    @RequestMapping(value = "/login", method = RequestMethod.GET)
+//    public String login(){
+//        System.out.println("GET called on login page");
+//        return "login_page.html";
+//    }
+//*/
+//}
+
 @Controller
 public class PrimaryController {
 
     @RequestMapping(value = "/help", method = RequestMethod.GET)
     public String help(){
         System.out.println("GET called on help page");
-        return "help_page.html";
+        return "help_page";
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String landing(){
         System.out.println("GET called on index page");
-        return "landing.html";
+        return "home";
+    }
+
+    @RequestMapping(value = "/home", method = RequestMethod.GET)
+    public String home(){
+        System.out.println("GET called on index page");
+        return "home";
     }
 
     @RequestMapping(value = "/restaurant", method = RequestMethod.GET)
     public String restaurants(){
         System.out.println("GET called on restaurant page");
-        return "restaurant_page.html";
+        return "restaurant_page";
     }
 
     @RequestMapping(value = "/review", method = RequestMethod.GET)
     public String reviews(){
         System.out.println("GET called on restaurant page");
-        return "review_page.html";
+        return "review_page";
     }
 
     @RequestMapping(value = "/user", method = RequestMethod.GET)
     public String users(){
         System.out.println("GET called on user page");
-        return "user_page.html";
+        return "user_page";
     }
 /*
     @RequestMapping(value = "/login", method = RequestMethod.GET)
